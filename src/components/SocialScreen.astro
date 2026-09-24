@@ -1,0 +1,74 @@
+---
+interface Props { name:string; screenKey:string }
+const {name,screenKey}=Astro.props;
+const src=`/assets/projects/side-by-side/${screenKey}.webp`;
+const explanations:Record<string,{title:string;purpose:string;reason:string}>={
+ discover:{title:'喜欢，让连接意愿更明确',purpose:'在了解照片、介绍与共同兴趣之后，表达进一步认识对方的意愿。',reason:'用居中的蓝紫色圆形按钮建立操作主次，与两侧跳过、撤销区分；把连接规则放在附近，让行动之前的预期更清晰。'},
+ circle:{title:'加入圈子，从围观到参与',purpose:'将对摄影等主题的兴趣，转化为持续参与圈子的入口。',reason:'宽按钮提供明确的视觉落点，放在圈子介绍之后，让用户先了解主题再决定加入，减少在内容与操作之间寻找入口的成本。'},
+ explore:{title:'发现好友，保留另一种探索方式',purpose:'浏览内容时，也可以主动寻找有共同兴趣的人。',reason:'独立入口区分“找内容”和“找朋友”两种意图。两条路径并存，不要求所有人都用同一种节奏建立关系。'},
+ create:{title:'发布，让表达有清晰的终点',purpose:'完成内容编辑后，用明确的主要操作提交动态。',reason:'将发布固定在页面右上角，与正文编辑区区分；用高对比颜色突出完成动作，同时由页面中的圈子与可见范围说明内容去向。'},
+ chat:{title:'发送，把共同兴趣延续为交流',purpose:'将输入的想法带入对话，让连接变成持续的交流。',reason:'发送按钮紧邻输入区域，缩短编辑与提交之间的操作距离。共同兴趣提示负责提供话题，发送按钮只承载清晰、单一的行动。'},
+};
+// Regions use the original 853 × 1844 design coordinates; the background crop
+// preserves the actual Figma artwork rather than replacing it with a mock UI.
+const regions:Record<string,{x:number;y:number;w:number;h:number;label:string;round?:boolean}[]>={
+ discover:[{x:358,y:1413,w:139,h:136,label:'喜欢 · 用明确的主要动作表达连接意愿',round:true}],
+ circle:[{x:40,y:915,w:773,h:82,label:'加入圈子 · 为兴趣参与提供明确入口'}],
+ explore:[{x:610,y:320,w:184,h:66,label:'发现好友 · 从找内容切换到找同好'}],
+ create:[{x:690,y:85,w:123,h:66,label:'发布 · 保持主要操作易于找到'}],
+ chat:[{x:745,y:1688,w:76,h:76,label:'发送消息 · 延续共同兴趣的话题',round:true}],
+};
+---
+<div class="screen-interaction">
+<div class="design-screen">
+ <a class="original" href={src} target="_blank" rel="noopener" aria-label={`查看${name}高清设计图`}><img src={src} width="853" height="1844" alt={`Side by Side ${name}设计`} loading="eager" decoding="async"/><span class="zoom">↗ 查看原图</span></a>
+ {(regions[screenKey]||[]).map(r=><button type="button" class:list={['detail',{'round':r.round}]} aria-label={`查看设计思路：${r.label}`} aria-expanded="false" aria-controls={`insight-${screenKey}`} style={`left:${r.x/853*100}%;top:${r.y/1844*100}%;width:${r.w/853*100}%;height:${r.h/1844*100}%;background-image:url('${src}');background-size:${853/r.w*100}% ${1844/r.h*100}%;background-position:${r.x/(853-r.w)*100}% ${r.y/(1844-r.h)*100}%`}><span class="sr-only">{r.label}</span></button>)}
+</div>
+{explanations[screenKey] && <><p class="interaction-hint">✦ 悬停按钮查看设计思路 · 点击可固定展开</p><div class="insight" id={`insight-${screenKey}`} inert><div class="insight-inner"><div class="insight-content"><span class="insight-label">COMPONENT INSIGHT / 组件解读</span><h4>{explanations[screenKey].title}</h4><small>功能介绍</small><p>{explanations[screenKey].purpose}</p><small>为什么这样设计</small><p>{explanations[screenKey].reason}</p><span class="insight-note">设计意图，实际效果仍需用户测试验证。</span></div></div></div></>}
+</div>
+<script>
+ document.querySelectorAll<HTMLElement>('.screen-interaction').forEach(wrapper=>{
+  const button=wrapper.querySelector<HTMLButtonElement>('.detail');
+  const panel=wrapper.querySelector<HTMLElement>('.insight');
+  if(!button||!panel)return;
+  let pinned=false;
+  const position=()=>{
+   if(!matchMedia('(min-width:701px)').matches)return;
+   const bounds=wrapper.getBoundingClientRect();
+   const target=button.getBoundingClientRect();
+   const width=Math.min(320,innerWidth-bounds.width-56);
+   panel.style.setProperty('--panel-width',`${Math.max(240,width)}px`);
+   wrapper.classList.toggle('panel-left',innerWidth-bounds.right<Math.max(240,width)+28);
+   const height=panel.scrollHeight;
+   const desired=target.top+target.height/2-height/2;
+   const top=Math.max(16,Math.min(desired,innerHeight-height-16));
+   panel.style.setProperty('--panel-top',`${top-bounds.top}px`);
+  };
+  const show=(open:boolean)=>{wrapper.classList.toggle('is-open',open);button.setAttribute('aria-expanded',String(open));panel.inert=!open;if(open)position();};
+  addEventListener('resize',()=>{if(wrapper.classList.contains('is-open'))position()});
+  addEventListener('scroll',()=>{if(wrapper.classList.contains('is-open'))position()},{passive:true});
+  button.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')show(true)});
+  wrapper.addEventListener('pointerleave',()=>{if(!pinned&&document.activeElement!==button)show(false)});
+  button.addEventListener('focus',()=>show(true));
+  button.addEventListener('click',()=>{pinned=!pinned;show(pinned)});
+  wrapper.addEventListener('keydown',e=>{if(e.key==='Escape'){pinned=false;show(false)}});
+  button.addEventListener('blur',()=>{if(!pinned)show(false)});
+ });
+</script>
+<style>
+ .screen-interaction{position:relative}
+ @media(min-width:701px){
+  .screen-interaction .insight{position:absolute;left:100%;top:var(--panel-top,0px);width:var(--panel-width,320px);box-sizing:content-box;padding-left:18px;z-index:20;display:block;grid-template-rows:none;translate:-8px 0;transition:opacity .22s ease,translate .22s ease,visibility .22s;pointer-events:none}
+  .screen-interaction.is-open .insight{translate:0 0;pointer-events:auto}
+  .screen-interaction.panel-left .insight{left:auto;right:100%;padding-left:0;padding-right:18px;translate:8px 0}
+  .screen-interaction.panel-left.is-open .insight{translate:0 0}
+  .insight .insight-inner{overflow:visible}
+  .insight .insight-content{margin-top:0;max-height:calc(100vh - 80px);overflow:auto;box-shadow:0 20px 60px #171b3730}
+ }
+ @media(prefers-reduced-motion:reduce){.screen-interaction .insight{transition:none}}
+ .screen-interaction.is-open .detail{transform:scale(1.16);box-shadow:0 12px 28px #5754ff66;outline-color:#a5a2ff;z-index:3}.insight{display:grid;grid-template-rows:0fr;opacity:0;visibility:hidden;transition:grid-template-rows .35s ease,opacity .25s ease,visibility .35s}.is-open .insight{grid-template-rows:1fr;opacity:1;visibility:visible}.insight-inner{min-height:0;overflow:hidden}.insight-content{margin-top:24px;background:#fff;color:#111632;border:1px solid #dcd9ff;border-radius:18px;padding:24px;box-shadow:0 14px 35px #5754ff12}.insight-label{font-size:9px;letter-spacing:.1em;color:#5754ff}.insight-content h4{font-size:19px;line-height:1.5;margin:15px 0 22px}.insight-content small{font-size:10px;color:#5754ff}.insight-content p{font-size:13px;line-height:1.85;margin:7px 0 19px;color:#65697e}.insight-note{font-size:10px;line-height:1.6;display:block;color:#8b8da0;border-top:1px solid #efedff;padding-top:14px}.detail{touch-action:manipulation}@media(prefers-reduced-motion:reduce){.insight{transition:none}}
+ .design-screen{position:relative;border-radius:20px;box-shadow:0 20px 35px #222b5420;background:#f6f6fd;isolation:isolate}.original{display:block;border-radius:20px;overflow:hidden}.original img{width:100%;height:auto;display:block}.zoom{position:absolute;bottom:24px;right:15px;background:#171b37e6;color:white;border-radius:30px;padding:9px 14px;font-size:11px;opacity:0;transition:opacity .2s}.original:hover .zoom,.original:focus-visible .zoom{opacity:1}.detail{position:absolute;display:block;border:0;border-radius:10px;background-repeat:no-repeat;padding:0;cursor:zoom-in;transition:transform .22s ease,box-shadow .22s ease;z-index:2;transform-origin:center;outline:2px solid transparent;outline-offset:3px}.detail.round{border-radius:50%}.detail:hover,.detail:focus-visible,.detail[aria-pressed=true]{transform:scale(1.12);box-shadow:0 12px 28px #5754ff66;outline-color:#a5a2ff;z-index:3}.detail[aria-pressed=true]{cursor:zoom-out}.original:focus-visible{outline:3px solid #5754ff;outline-offset:6px}.interaction-hint{font-size:10px;line-height:1.6;color:#8e8caa;margin:14px 0 -10px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}@media(max-width:700px){.design-screen{max-width:330px;margin:auto}.zoom{opacity:1;bottom:18px}}@media(prefers-reduced-motion:reduce){.detail,.zoom{transition:none}}
+</style>
+<style is:global>
+ @media(min-width:701px){.social-case .screen-card:has(.screen-interaction.is-open){position:relative;z-index:30}}
+</style>

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "4",
+    "cover": "/assets/projects/geren-zuopinji-2026/page-04.jpg",
+    "title": "个人作品集",
+    "desc": "海外电商 · 乐彩音乐 · 瓷艺轩 · 视觉探索",
+    "url": "/project/geren-zuopinji-2026",
+    "detail": "/project/geren-zuopinji-2026",
+    "category": "recommend,ui,portfolio",
+    "tag": "作品集",
+    "date": "2026-01-01",
+    "mark": true
+  },
+  {
+    "id": "5",
+    "cover": "/assets/projects/wabu/cover.webp",
+    "title": "哇布 Fufu · 陪伴玩具",
+    "desc": "让每一次陪伴都有迹可循 · 首页、内容页与状态设计",
+    "url": "/project/wabu",
+    "detail": "/project/wabu",
+    "category": "recommend,ui",
+    "tag": "UI / UX",
+    "date": "2026-09-21",
+    "mark": true
+  },
+  {
+    "id": "6",
+    "cover": "/assets/projects/side-by-side/cover.webp",
+    "title": "Side by Side · 兴趣社交 App",
+    "desc": "找到同频的人 · 从共同兴趣到真实连接",
+    "url": "/project/side-by-side",
+    "detail": "/project/side-by-side",
+    "category": "recommend,ui",
+    "tag": "UI / UX",
+    "date": "2026-09-21",
+    "mark": true
+  }
+]

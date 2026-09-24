@@ -1,0 +1,119 @@
+---
+import frames from '../data/portfolio-figma.json';
+import PortfolioCaseContent from './PortfolioCaseContent.astro';
+const asset=(key:string)=>`/assets/projects/portfolio-web/${key}.webp`;
+const projects=[
+ {id:'commerce',no:'01',match:'作品1-',title:'让跨境采购，清晰而高效。',name:'HuePure · 海外电商批发平台',en:'COMMERCE / WEB',color:'#d94839',cover:'49-162',intro:'面向东南亚、日韩与美国的跨境 B2B 服装采购场景，以区域仓库适配与采购效率为核心，将找货、查看、批量下单和订单管理连接起来。',tags:['跨境 B2B','信息架构','采购流程'],insights:[['从业务开始','围绕批发商与零售商高效找货、明确成本、把控风险的需求，梳理筛选、查看、下单、物流与售后链路。'],['让决策信息先出现','库存、发货仓、起订量与价格前置，结合清晰分类和商品信息层级，减少反复查找。'],['保持体系一致','以色彩、字体、按钮、输入框和卡片规范建立统一界面语言，兼顾区域适配与不同终端。']]},
+ {id:'music',no:'02',match:'作品2-',title:'发现一首歌，也发现一种心情。',name:'乐彩 · 音乐 App',en:'MUSIC / MOBILE',color:'#8253d7',cover:'105-595',intro:'以年轻用户为核心，围绕发现、播放、分享三大场景构建音乐体验。将品牌视觉、沉浸播放与音乐社区结合，让内容发现和日常听歌保持连续。',tags:['18–30 岁目标用户','沉浸播放','音乐社区'],insights:[['理解使用情境','围绕学习、通勤与工作等场景展开用户分析，关注内容新鲜感、搜索分类、收藏管理和播放连续性。'],['三个核心体验','高效发现音乐、沉浸式播放与社区分享相互衔接，配合个人音乐资产管理，构建完整使用路径。'],['统一而有辨识度','渐变色彩建立年轻化视觉氛围，卡片组织推荐内容；Mini Player 为跨页面播放提供连续入口。']]},
+ {id:'ceramics',no:'03',match:'作品3-',title:'把瓷器之美，变成可探索的知识。',name:'瓷艺轩 · iPad 体验设计',en:'CULTURE / TABLET',color:'#3f797a',cover:'88-5709',intro:'围绕瓷器文化、制作技艺与艺术审美组织内容，以平板端体验连接作品欣赏和知识学习，让传统文化以更直观的方式被理解。',tags:['文化内容','平板体验','知识探索'],insights:[['从文化脉络切入','将历史起源、发展与不同时期的演变作为学习背景，帮助读者理解器物背后的文化。'],['让工艺更易理解','围绕拉坯、施釉、烧制等制作过程展开知识内容，串联材料、技艺与作品。'],['以作品承载审美','通过青花、粉彩、釉里红等不同风格建立认识入口，将欣赏与知识探索连接起来。']]},
+ {id:'experiments',no:'04',match:'作品4-',title:'在不同尺度里，探索视觉表达。',name:'其他设计 · 视觉探索',en:'EXPERIMENTS / VISUAL',color:'#b06c32',cover:'106-813',intro:'收录图标、信息图表、游戏界面与其他设计草稿。不同载体的尝试，组成作品集中的视觉探索章节。',tags:['图标设计','信息图表','游戏界面'],insights:[['图形语言','观察小尺度图形如何传达信息，探索形态的辨识度与视觉特征。'],['信息组织','通过图表和版式建立阅读顺序，呈现不同类型内容的表达方式。'],['多样化探索','把界面与视觉草稿并置，展示不同设计情境下的探索过程。']]},
+];
+const labels:Record<string,string>={'25-11':'项目概览','29-21':'项目背景与业务逻辑','32-17':'设计思路','39-263':'视觉与组件规范','49-162':'首页设计','58-66':'首页组件拆解','67-224':'账户中心设计','58-99':'账户中心模块拆解','76-485':'商品详情设计','78-125':'详情页设计逻辑','78-157':'界面展示','99-425':'项目概览','100-277':'背景与目标','126-564':'目标用户与需求','100-297':'视觉规范','126-1442':'设计策略与信息架构','105-595':'品牌与界面展示','130-510':'核心体验总览','130-537':'首页设计','88-5709':'项目概览','88-5724':'文化背景与选题','106-813':'视觉探索概览'};
+Object.assign(labels,{'131-773':'搜索与内容检索','131-801':'发现页设计','131-829':'乐圈社区','131-857':'歌单详情','131-885':'沉浸式播放器','135-1772':'播放器交互流程','131-913':'音乐资产与个人主页','135-689':'项目总结','88-5762':'竞品调研','88-6031':'体验规划','88-5878':'视觉与图标规范','88-6282':'首页设计','88-6332':'资料馆','88-6374':'内容模块与页面逻辑','96-195':'制瓷体验流程','99-344':'完整界面展示','109-886':'视觉探索 / 01','109-887':'视觉探索 / 02','109-888':'视觉探索 / 03','110-904':'后台与游戏界面设计'});
+const title=(frame:typeof frames[number])=>labels[frame.key]||frame.texts.find(t=>/设计展示-|页面|规范|分析|架构/.test(t)&&t.length<35)||frame.name;
+---
+<main class="portfolio-web">
+ <header class="portfolio-hero shell" id="portfolio-top"><a class="back" href="/project">← 所有项目</a><div class="hero-meta"><span>TOK / SELECTED WORKS</span><span>04 个方向 · UI / UX / VISUAL</span></div><div class="hero-heading"><h1>从问题出发，<span>让设计落在体验里。</span></h1><p>电商、音乐、文化与视觉探索。<br/>记录如何组织信息、连接场景，<br/>并把想法变成可以使用的界面。</p></div><div class="index-heading"><h2>作品索引</h2><span>选择项目，了解设计过程 ↘</span></div><div class="hero-collage">{projects.map(p=><a href={`#${p.id}`} aria-label={`查看${p.name}`}><div class:list={['project-thumbnail',p.id]}><img src={`/assets/projects/portfolio-ui/${({commerce:'commerce-home',music:'music-home',ceramics:'ceramics-home',experiments:'visual-icons'} as Record<string,string>)[p.id]}.webp`} alt={p.name} width="640" height="400"/></div><div class="entry-caption"><small>{p.no}</small><div><h3>{p.name}</h3><p>{p.tags.join(' / ')}</p></div><b aria-hidden="true">↗</b></div></a>)}</div></header>
+ <nav id="work-index" class="work-index" aria-label="作品集章节"><div class="shell">{projects.map(p=><a href={`#${p.id}`} aria-label={`跳转到${p.name}`}><small>{p.no}</small><span>{p.name.split(' · ')[0]}</span><span>↗</span></a>)}</div></nav>
+ {projects.map(p=>{const pages=frames.filter(f=>f.name.includes(p.match));return <section class="work-section" id={p.id} style={`--accent:${p.color}`}><div class="shell"><header class="work-header"><p class="eyebrow">{p.no} / {p.en}</p><h2>{p.title}</h2><div class="overview"><h3>{p.name}</h3><div><p>{p.intro}</p><div class="tags">{p.tags.map(t=><span>{t}</span>)}</div></div></div></header><div class="insights">{p.insights.map((item,i)=><article><span>0{i+1}</span><h4>{item[0]}</h4><p>{item[1]}</p></article>)}</div><PortfolioCaseContent id={p.id}/><a class="back-index" href="#portfolio-top">返回作品索引 ↑</a></div></section>})}
+ <footer class="portfolio-end shell"><p class="eyebrow">CONTINUE EXPLORING</p><h2>让设计，回到真实的使用场景。</h2><p>从需求理解到界面落地，持续探索清晰、连贯而有温度的数字体验。</p><a href="/project">继续浏览其他项目 ↗</a></footer>
+ <dialog class="artwork-viewer" aria-labelledby="artwork-title"><header><h2 id="artwork-title">设计原图</h2><button class="viewer-close" aria-label="关闭设计原图">关闭 ×</button></header><div class="viewer-body"><p class="image-status" role="status" hidden></p><img alt=""/><button class="image-retry" hidden>重新加载</button></div><p>按 Esc 或点击关闭返回作品集；长图可上下滚动查看。</p></dialog>
+</main>
+<script>
+ const viewer=document.querySelector<HTMLDialogElement>('.artwork-viewer');
+ const artwork=viewer?.querySelector<HTMLImageElement>('.viewer-body img');
+ const heading=viewer?.querySelector('#artwork-title');
+ const status=viewer?.querySelector<HTMLElement>('.image-status');
+ const retry=viewer?.querySelector<HTMLButtonElement>('.image-retry');
+ artwork?.addEventListener('load',()=>{artwork.hidden=false;if(status)status.hidden=true;if(retry)retry.hidden=true;});
+ artwork?.addEventListener('error',()=>{artwork.hidden=true;if(status){status.hidden=false;status.textContent='图片暂时无法加载，请重试。'}if(retry)retry.hidden=false;});
+ retry?.addEventListener('click',()=>{if(artwork){if(status)status.textContent='正在加载图片…';retry.hidden=true;const src=artwork.src;artwork.removeAttribute('src');artwork.src=src;}});
+ let oldOverflow='';
+ document.querySelectorAll<HTMLButtonElement>('.board-preview').forEach(button=>button.addEventListener('click',()=>{
+  if(!viewer||!artwork||!heading)return;
+  if(status){status.hidden=false;status.textContent='正在加载图片…';}if(retry)retry.hidden=true;artwork.hidden=true;
+  artwork.src=button.dataset.image||'';artwork.alt=button.dataset.title||'设计原图';heading.textContent=artwork.alt;
+  oldOverflow=document.body.style.overflow;document.body.style.overflow='hidden';viewer.showModal();
+  const body=viewer.querySelector('.viewer-body');if(body)body.scrollTop=0;
+ }));
+ viewer?.querySelector('.viewer-close')?.addEventListener('click',()=>viewer.close());
+ viewer?.addEventListener('click',event=>{if(event.target===viewer)viewer.close()});
+ viewer?.addEventListener('close',()=>{document.body.style.overflow=oldOverflow});
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ const chapterLinks=document.querySelectorAll<HTMLAnchorElement>('.work-index a');
+ const sections=document.querySelectorAll<HTMLElement>('.portfolio-web .work-section');
+ let chapterFrame=false;
+ const updateChapter=()=>{
+  let active=sections[0]?.id;
+  sections.forEach(section=>{if(section.getBoundingClientRect().top<innerHeight*.4)active=section.id});
+  chapterLinks.forEach(link=>{if(link.hash===`#${active}`)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current')});
+  chapterFrame=false;
+ };
+ addEventListener('scroll',()=>{if(!chapterFrame){chapterFrame=true;requestAnimationFrame(updateChapter)}},{passive:true});
+ updateChapter();
+ if(!reduced.matches&&'IntersectionObserver' in window){
+  const items=document.querySelectorAll('.portfolio-web .work-header,.portfolio-web .insights');
+  const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.06});
+  items.forEach(item=>{item.classList.add('reveal');observer.observe(item)});
+ }
+</script>
+<style>
+ .native-cover{padding:35px;min-height:250px;background:linear-gradient(135deg,#fff,#e8ebed);color:var(--cover-color);position:relative}.native-cover small{font-size:9px;letter-spacing:.1em}.native-cover strong{display:block;font-size:38px;line-height:1.3;margin-top:40px;letter-spacing:-.03em}.native-cover p{font-size:10px;color:#7a818a;margin-top:14px}.native-cover b{position:absolute;right:20px;bottom:20px;font-weight:400;font-size:28px}.hero-collage a:hover .native-cover{background:#fff}@media(max-width:650px){.native-cover{padding:20px;min-height:190px}.native-cover strong{font-size:26px}.native-cover p{max-width:85%;line-height:1.7}}
+ .portfolio-web .work-index{top:64px}.portfolio-web .work-section{scroll-margin-top:145px}
+ @media(max-width:600px){.portfolio-web .work-section{scroll-margin-top:170px}}
+ .portfolio-web{background:#f7f7f3;color:#242c3d;overflow:clip}.shell{max-width:1280px;width:calc(100% - 96px);margin:auto}.portfolio-hero{padding:50px 0 72px}.back{font-size:12px;color:#727b89}.hero-meta{display:flex;justify-content:space-between;font-size:10px;letter-spacing:.15em;margin:70px 0 30px;color:#78808c}h1{font-size:clamp(46px,6.8vw,94px);letter-spacing:-.06em;line-height:1.2;font-weight:600;margin:0}h1 span{display:block;color:#8d99a3}.hero-bottom{display:flex;justify-content:space-between;align-items:end;margin:30px 0 45px}.hero-bottom p{font-size:14px;line-height:1.9;color:#747d89}.hero-bottom>a{font-size:13px;color:#242c3d;border-bottom:1px solid;padding-bottom:8px}.hero-collage{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:18px}.hero-collage a{position:relative;overflow:hidden;border-radius:14px;background:#e6e8eb}.hero-collage img{width:100%;height:270px;object-fit:cover;display:block;transition:transform .5s}.hero-collage a:hover img{transform:scale(1.045)}.hero-collage span{position:absolute;bottom:14px;left:14px;background:#ffffffeb;padding:8px 12px;border-radius:20px;font-size:9px;color:#242c3d}.work-index{background:#f7f7f3ed;border-block:1px solid #dbdeda;position:sticky;top:0;z-index:10;backdrop-filter:blur(14px)}.work-index .shell{display:grid;grid-template-columns:repeat(4,1fr);gap:25px}.work-index a{display:flex;align-items:center;gap:12px;padding:23px 0;color:#242c3d;font-size:12px}.work-index small{color:#929aa3;font-size:10px}.work-index a>span:last-child{margin-left:auto}.work-index a:hover{color:#a4573f}.work-section{padding:90px 0;scroll-margin-top:72px}.work-section:nth-of-type(even){background:#eef0f2}.eyebrow{font-size:10px;letter-spacing:.15em;color:var(--accent,#747d89);margin:0 0 25px}h2{font-size:clamp(30px,4vw,54px);line-height:1.35;letter-spacing:-.035em;margin:0}.overview{display:grid;grid-template-columns:1fr 1.5fr;gap:60px;margin-top:42px}.overview h3{font-size:18px;font-weight:500;margin:0}.overview p{font-size:15px;line-height:1.9;color:#727b89;margin:0}.tags{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}.tags span{border:1px solid #d4d8dc;border-radius:30px;padding:7px 12px;font-size:11px}.insights{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin:55px 0 70px}.insights article{border-top:1px solid #cdd2d6;padding-top:23px}.insights article>span{color:var(--accent);font-size:11px}.insights h4{font-size:20px;margin:15px 0}.insights p{font-size:13px;line-height:1.9;color:#727b89}.gallery-heading{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #d4d8dc;padding-bottom:16px;margin-bottom:30px}.gallery-heading p{font-size:16px;margin:0}.gallery-heading small{font-size:9px;color:#7f8793;letter-spacing:.08em}.portfolio-gallery{display:grid;grid-template-columns:1fr 1fr;gap:38px 26px;align-items:start}.board.featured{grid-column:1/-1}.board-preview{display:block;width:100%;padding:0;border:0;position:relative;overflow:hidden;border-radius:14px;background:#e5e8eb;cursor:zoom-in;text-align:left}.board-preview img{display:block;width:100%;height:auto;transition:transform .5s}.board-preview:hover img{transform:scale(1.025)}.long-board .board-preview img{max-height:420px;object-fit:cover;object-position:top}.view-label{position:absolute;bottom:15px;right:15px;background:#242c3de6;color:white;border-radius:30px;font-size:11px;padding:10px 15px;opacity:0;translate:0 5px;transition:opacity .2s,translate .2s}.board-preview:hover .view-label,.board-preview:focus-visible .view-label{opacity:1;translate:0 0}.board-caption{display:flex;align-items:baseline;gap:14px;margin-top:18px}.board-caption>span{font-size:10px;color:var(--accent);flex-shrink:0}.board-caption h4{font-size:16px;font-weight:500;margin:0}.board-notes{font-size:12px;margin:15px 0 0;padding:15px 0;border-top:1px solid #dce0e3}.board-notes summary{cursor:pointer;display:flex;justify-content:space-between;color:#727b89}.board-notes[open] summary{color:var(--accent)}.board-notes p{white-space:pre-line;line-height:1.95;color:#64707e;margin:18px 0;overflow-wrap:anywhere}.board-notes[open] summary span{rotate:45deg}.back-index{display:block;width:fit-content;margin:45px auto 0;color:#727b89;font-size:12px}.portfolio-end{text-align:center;padding:90px 0}.portfolio-end h2{font-size:clamp(28px,3.6vw,44px)}.portfolio-end>p:not(.eyebrow){font-size:12px;color:#7f8793;line-height:1.8;margin:25px 0}.portfolio-end>a{display:inline-block;border:1px solid #bdc5cc;border-radius:30px;padding:13px 22px;font-size:13px;color:#242c3d}.artwork-viewer{border:0;padding:0;width:94vw;max-width:1600px;height:92dvh;max-height:92dvh;background:#f6f7f9;color:#242c3d;border-radius:16px;overflow:hidden}.artwork-viewer[open]{display:flex;flex-direction:column}.artwork-viewer::backdrop{background:#0e1427b8;backdrop-filter:blur(7px)}.artwork-viewer header{display:flex;justify-content:space-between;align-items:center;padding:16px 22px;gap:15px}.artwork-viewer h2{font-size:14px;letter-spacing:0}.viewer-close{flex-shrink:0;cursor:pointer;background:#e4e7ed;border:0;border-radius:30px;padding:9px 16px;color:#242c3d}.viewer-body{overflow:auto;flex:1;min-height:0}.viewer-body img{display:block;width:auto;max-width:100%;height:auto;margin:0 auto}.artwork-viewer>p{font-size:10px;text-align:center;color:#727b89;padding:10px;margin:0}.reveal{opacity:0;translate:0 24px;transition:opacity .65s,translate .65s}.reveal.visible{opacity:1;translate:0 0}a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--accent,#758aa4);outline-offset:5px}@media(max-width:850px){.shell{width:calc(100% - 40px)}.hero-collage{grid-template-columns:1fr 1fr}.hero-collage a:first-child{grid-column:1/-1}.hero-collage img{height:190px}.hero-collage a:first-child img{height:auto}.overview{gap:25px}.work-index .shell{gap:14px}.work-index a{font-size:10px;gap:6px}.insights{gap:20px}}@media(max-width:600px){.portfolio-hero{padding-top:25px;padding-bottom:40px}.hero-meta{margin-top:42px;font-size:8px;letter-spacing:.05em}.hero-bottom{display:block}.hero-bottom>a{display:inline-block;margin-top:12px}.hero-collage{gap:10px}.hero-collage img{height:145px}.hero-collage span{font-size:8px;left:8px;bottom:8px;padding:6px 8px}.work-index .shell{grid-template-columns:1fr 1fr;gap:0 25px}.work-index a{padding:12px 0;font-size:11px}.work-section{padding:55px 0;scroll-margin-top:95px}.overview,.insights,.portfolio-gallery{grid-template-columns:1fr}.overview{margin-top:25px}.insights{margin:35px 0 45px;gap:18px}.insights h4{font-size:18px}.portfolio-gallery{gap:24px}.gallery-heading small{font-size:8px}.view-label{opacity:1;translate:none;font-size:9px;padding:7px 10px}.board-caption h4{font-size:14px}.portfolio-end{padding:60px 0}.artwork-viewer header{padding:12px}.artwork-viewer h2{font-size:11px}.viewer-body img{min-width:0}.viewer-body{overscroll-behavior:contain}}@media(prefers-reduced-motion:reduce){.reveal{opacity:1;translate:none;transition:none}.board-preview img,.hero-collage img,.view-label{transition:none}}
+</style>
+<style>
+ @media(min-width:901px){
+  .portfolio-web{padding-left:56px}
+  .portfolio-web .work-index{left:10px;width:42px;padding:12px 5px;overflow:hidden;transition:width .24s ease,box-shadow .24s ease;background:#f7f7f3f5}
+  .work-index::before{content:'目录';padding:7px 0;text-align:center;font-size:11px;white-space:nowrap}
+  .portfolio-web .work-index .shell{width:144px;gap:5px}
+  .portfolio-web .work-index a{width:144px;box-sizing:border-box;padding:14px 7px;gap:15px}
+  .work-index a>span{opacity:0;visibility:hidden;transition:opacity .2s;white-space:nowrap}
+  .portfolio-web .work-index:hover,.portfolio-web .work-index:focus-within{width:170px;padding:12px;box-shadow:0 14px 40px #242c3d20}
+  .work-index:hover::before,.work-index:focus-within::before{content:'作品目录 / CONTENTS';font-size:9px}
+  .work-index:hover a>span,.work-index:focus-within a>span{opacity:1;visibility:visible}
+ }
+ @media(prefers-reduced-motion:reduce){.portfolio-web .work-index,.work-index a>span{transition:none}}
+</style>
+<style>
+ .portfolio-web .artwork-viewer{position:fixed;inset:0;margin:auto;box-sizing:border-box;width:calc(100vw - 48px);height:calc(100dvh - 48px);max-width:1600px;max-height:calc(100dvh - 48px)}
+ .artwork-viewer header,.artwork-viewer>p{flex-shrink:0}
+ .work-index a[aria-current=location]{color:#a4573f;font-weight:600}
+ @media(min-width:901px){
+  .portfolio-web{padding-left:56px}
+  .portfolio-web .shell{width:calc(100% - 64px)}
+  .portfolio-web .work-index{position:fixed;left:10px;top:50%;translate:0 -50%;width:42px;border:1px solid #dce0df;border-radius:18px;box-shadow:0 12px 35px #242c3d0b;padding:12px 5px}
+  .work-index::before{content:'目录';display:block;padding:7px 0;font-size:11px;letter-spacing:.08em;color:#89919b}
+  .portfolio-web .work-index .shell{width:144px;display:flex;flex-direction:column;gap:5px}
+  .portfolio-web .work-index a{padding:14px 7px;border-radius:10px;font-size:12px;gap:15px}
+  .work-index a[aria-current=location]{background:#e9eae5}
+  .portfolio-web .work-section{scroll-margin-top:85px}
+ }
+ @media(max-width:600px){.portfolio-web .artwork-viewer{width:100vw;height:100dvh;max-height:100dvh;border-radius:0}}
+</style>
+
+<style>
+.portfolio-web{--ink:#252b30;--muted:#68717a;--line:#dce0df;background:#fafaf7;color:var(--ink)}
+.portfolio-web .shell{max-width:1240px}.portfolio-hero{padding:30px 0 56px}
+.hero-meta{margin:36px 0 22px}.hero-heading{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:36px}
+h1{font-size:clamp(32px,4vw,58px);line-height:1.35;font-weight:550;letter-spacing:-.045em}h1 span{color:#727b78}.hero-heading>p{font-size:14px;line-height:1.9;color:var(--muted);margin:0}
+.index-heading{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding:22px 0}.index-heading h2{font-size:14px;letter-spacing:0;font-weight:500}.index-heading>span{font-size:11px;color:var(--muted)}
+.hero-collage{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 24px}.hero-collage a{background:transparent;border-radius:0;overflow:visible}
+.project-thumbnail{height:240px;border:1px solid var(--line);border-radius:8px;background:#edece6;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-collage .project-thumbnail img{width:100%;height:100%;object-fit:contain}
+.project-thumbnail.music{background:#ebe7f1}.hero-collage .music img{width:auto;height:88%;align-self:end;border-radius:12px 12px 0 0}
+.project-thumbnail.ceramics{background:#e9e5dc;padding:22px}.project-thumbnail.experiments{padding:18px;background:#e9edef}
+.entry-caption{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);align-items:baseline}.entry-caption>small{font-size:10px;color:var(--muted)}.entry-caption h3{font-size:16px;font-weight:550;line-height:1.5;margin:0}.entry-caption p{font-size:11px;color:var(--muted);margin:7px 0 0}.entry-caption b{font-size:20px;font-weight:400;margin-left:auto}
+.work-section{padding:60px 0;border-top:1px solid var(--line)}.work-section:nth-of-type(even){background:transparent}
+.work-header>h2{font-size:clamp(28px,3.2vw,44px);font-weight:550;line-height:1.4}
+.overview{margin-top:30px;gap:40px}.overview p{max-width:650px}.tags span{border:0;border-left:2px solid var(--accent);border-radius:0;padding:0 10px;font-size:10px}
+.insights{margin:32px 0 0;padding:24px 0;border-block:1px solid var(--line)}.insights article{border:0;padding:0}.insights h4{font-size:16px;margin:12px 0}.insights p{margin:0}
+.portfolio-end{text-align:left;padding:48px 0 60px;border-top:1px solid var(--line)}.portfolio-end h2{font-size:28px}.portfolio-end>a{border-radius:5px}
+.portfolio-web .work-index{border-radius:8px;box-shadow:none;backdrop-filter:none}
+.artwork-viewer{border-radius:10px}.artwork-viewer header{border-bottom:1px solid var(--line)}.viewer-close,.image-retry{border-radius:5px;border:1px solid var(--line);background:#edf0ec;color:var(--ink);min-height:40px;padding:8px 16px;cursor:pointer}
+.image-status{text-align:center;font-size:14px;padding:32px;color:var(--muted)}.image-retry{display:block;margin:0 auto}.image-retry[hidden],.image-status[hidden],.viewer-body img[hidden]{display:none}
+@media(max-width:850px){.hero-collage a:first-child{grid-column:auto}.project-thumbnail{height:210px}.hero-heading{align-items:start}.hero-heading>p{max-width:220px}.hero-collage .project-thumbnail img{height:100%}.hero-collage .music img{height:88%}}
+@media(max-width:640px){.hero-heading{display:block}.hero-heading>p{margin-top:22px;max-width:none;font-size:13px}.hero-collage{grid-template-columns:1fr;gap:22px}.project-thumbnail{height:220px}.overview{grid-template-columns:1fr;gap:20px}.insights{grid-template-columns:1fr;gap:22px}.insights article{display:grid;grid-template-columns:24px 1fr;gap:8px}.insights h4{margin:0}.insights p{grid-column:2}.work-section{padding:40px 0}.portfolio-hero{padding:20px 0 36px}.hero-meta{margin-top:25px}.entry-caption h3{font-size:15px}}
+</style>

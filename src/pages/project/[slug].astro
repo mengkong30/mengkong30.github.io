@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PortfolioWeb from '../../components/PortfolioWeb.astro';
+
+export function getStaticPaths() {
+  return [{ params: { slug: 'geren-zuopinji-2026' } }];
+}
+---
+<BaseLayout title="个人作品集｜TOK" description="海外电商、乐彩音乐 App、瓷艺轩 iPad 与视觉探索：从设计背景、思路到界面的作品集。" keywords="TOK,作品集,UI,UX,交互设计">
+ <PortfolioWeb />
+</BaseLayout>

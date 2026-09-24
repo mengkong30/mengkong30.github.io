@@ -1,0 +1,40 @@
+---
+
+
+import { getCollection } from 'astro:content';
+import BlogPostLayout from "../layouts/BlogPostLayout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import PostPreview from '../components/PostPreview.astro';
+import {pageTag, pageDescription,blogTdk} from '../data/content';
+
+const projects = (await getCollection('blog')).sort(
+	(a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+);
+---
+
+<BlogPostLayout
+		title={blogTdk.title || ''}
+		description = {blogTdk.description || ''}
+		keywords = {blogTdk.keywords || ''}
+>
+	<div class="post">
+		<main class="post-wrapper about">
+			<SectionHeader
+			tag={pageTag.blog}
+			description={pageDescription.blog}>
+				博客
+			</SectionHeader>
+			<section class="border-top">
+				<div class="posts">
+					<div class="posts-container">
+						{
+							projects.map((project) => (
+								<PostPreview post={project} />
+							))
+						}
+					</div>
+				</div>
+			</section>
+		</main>
+	</div>
+</BlogPostLayout>

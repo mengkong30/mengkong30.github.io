@@ -1,0 +1,27 @@
+<div class="reading-progress" aria-hidden="true"></div>
+<script>
+ const root=document.querySelector('.social-case');
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ if(root&&!reduced.matches&&'IntersectionObserver' in window){
+  const items=root.querySelectorAll<HTMLElement>('.research .heading,.research .card,.research .needs article,.research .journey li,.chapter-head,.screen-card,.visual-system,.closing');
+  const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('revealed');observer.unobserve(entry.target)}})},{threshold:.08});
+  items.forEach(el=>{el.classList.add('reveal-item');observer.observe(el)});
+  reduced.addEventListener('change',()=>{if(reduced.matches){items.forEach(el=>el.classList.add('revealed'));observer.disconnect()}});
+ }
+ const progress=document.querySelector<HTMLElement>('.reading-progress');
+ let scheduled=false;
+ const update=()=>{if(progress){const max=document.documentElement.scrollHeight-innerHeight;progress.style.transform=`scaleX(${max>0?Math.min(1,Math.max(0,scrollY/max)):0})`}scheduled=false};
+ addEventListener('scroll',()=>{if(!scheduled){scheduled=true;requestAnimationFrame(update)}},{passive:true});
+ addEventListener('resize',update);update();
+</script>
+<style is:global>
+ .reading-progress{position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#5754ff,#c09aff);transform:scaleX(0);transform-origin:left;z-index:100;pointer-events:none}
+ .social-case .reveal-item{opacity:0;translate:0 24px;transition:opacity .65s ease,translate .65s cubic-bezier(.2,.65,.3,1)}
+ .social-case .reveal-item.revealed{opacity:1;translate:0 0}
+ .social-case .screen-card:nth-child(2),.social-case .journey li:nth-child(2){transition-delay:.08s}.social-case .screen-card:nth-child(3),.social-case .journey li:nth-child(3){transition-delay:.16s}
+ .social-case .palette span{transition:transform .35s,box-shadow .35s}.social-case .palette div:hover span{transform:translateY(-9px) rotate(-3deg);box-shadow:0 16px 25px #5754ff22}
+ .social-case .chapters a{transition:color .2s,translate .2s}.social-case .chapters a:hover{color:#5754ff;translate:0 -4px}
+ .social-case .hero-title{animation:social-intro .85s ease both}.social-case .floating-note{animation:social-float 5s ease-in-out 2}
+ @keyframes social-intro{from{opacity:0;translate:0 20px}to{opacity:1;translate:0 0}}@keyframes social-float{50%{translate:0 -12px}}
+ @media(prefers-reduced-motion:reduce){.social-case .reveal-item{opacity:1;translate:none;transition:none}.social-case .hero-title,.social-case .floating-note{animation:none}.social-case .palette span,.social-case .chapters a{transition:none}}
+</style>

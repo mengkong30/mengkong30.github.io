@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Cards from "../components/Cards.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import {pageTag, pageDescription,homeTdk} from '../data/content';
+---
+
+<BaseLayout
+title={homeTdk.title  || ''}
+description ={homeTdk.description  || ''}
+keywords = {homeTdk.keywords  || ''}
+>
+	<div class="section hero">
+		<div class="container">
+			<SectionHeader
+				tag={pageTag.index}
+				description={pageDescription.index}>
+				TOK · UI / 交互设计师
+			</SectionHeader>
+			<Cards />
+		</div>
+	</div>
+
+</BaseLayout>
+
+
+
