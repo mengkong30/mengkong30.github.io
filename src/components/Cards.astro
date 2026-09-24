@@ -12,6 +12,7 @@ for (const [index,item] of cardData.entries()) {
     id: item.id || index,
     title: item.title,
     cover: item.cover || "",
+    video: item.video || "",
     description: item.desc || "",
     url: item.url || "",
     detail: item.detail || "",
@@ -42,10 +43,10 @@ const count = cards.length;
                   </div>
                   <div class="card-body">
                       <a href={card.detail ? card.detail:"javascript:void(0)"} class="card-figure" target={card.detail?.startsWith("http") ? "_blank":"_self"}>
-                        (<img class="card-figure__img lazy"
+                        {card.video ? <video class="card-figure__video" src={card.video} muted loop autoplay playsinline preload="metadata" aria-label={`${card.title}预览`} /> : <img class="card-figure__img lazy"
                               src={card.cover} loading="lazy"
-                              alt="Loading Animations"
-                        >)
+                              alt={card.title}
+                        />}
                       </a>
                   </div>
                   <div class="card-footer">
@@ -71,9 +72,14 @@ const count = cards.length;
       // 检查是否存在带有类名 '.card-figure__video' 的元素
       const videos = document.querySelectorAll('.card-figure__video') as NodeListOf<HTMLVideoElement>;;
 
-      // 如果存在视频元素，则执行相关操作
+      // Respect reduced-motion preference for looping card previews.
       if (videos.length > 0) {
           videos.forEach(video => {
+              if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                  video.autoplay = false;
+                  video.pause();
+                  return;
+              }
               // 设置自动播放
               video.autoplay = true;
               // 禁止声音

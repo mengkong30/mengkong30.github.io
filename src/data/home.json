@@ -34,5 +34,29 @@
     "tag": "UI / UX",
     "date": "2026-09-21",
     "mark": true
+  },
+  {
+    "id": "7",
+    "title": "合成 2 · 动效作品",
+    "desc": "视频动效展示 · 点击观看完整作品",
+    "video": "/assets/projects/motion/composite-2.mp4",
+    "url": "/project/motion-composite-2",
+    "detail": "/project/motion-composite-2",
+    "category": "motion",
+    "tag": "动效",
+    "date": "2026-09-24",
+    "mark": false
+  },
+  {
+    "id": "8",
+    "title": "Fufu · Curiosity V2",
+    "desc": "Fufu 动效展示 · 点击观看完整作品",
+    "video": "/assets/projects/motion/fufu-curiosity-v2.mp4",
+    "url": "/project/motion-fufu-curiosity-v2",
+    "detail": "/project/motion-fufu-curiosity-v2",
+    "category": "motion",
+    "tag": "动效",
+    "date": "2026-09-24",
+    "mark": false
   }
 ]
