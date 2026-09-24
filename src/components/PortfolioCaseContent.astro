@@ -72,3 +72,19 @@ h3{font-size:clamp(23px,2.4vw,32px);font-weight:550;margin-bottom:24px}
 .original-notes summary{min-height:52px;padding:18px 0;font-size:14px}.original-notes summary:hover{color:var(--accent)}
 @media(max-width:640px){.native-section{margin:32px 0;padding-top:24px}.visual-native{gap:24px}.research-grid article{padding:4px 18px}.phone-gallery .ui-art{max-width:280px}.ui-copy{padding-top:20px}}
 </style>
+
+<style is:global>
+.portfolio-web .case-content{color:var(--portfolio-ink)}
+.portfolio-web .case-content :is(h3,h4,.flow span,.architecture span,.playback-flow b,.playback-flow p,.type-demo strong,.original-notes summary){color:var(--portfolio-ink)}
+.portfolio-web .case-content :is(.research-grid p,.visual-native p,.visual-native small,.boundary,.playback-flow small,.swatches code,.type-demo small,.ui-copy>p,.logic ul,.original-notes details p){color:var(--portfolio-muted)}
+.portfolio-web .case-content :is(.label,.flow small,.logic>span,.original-notes summary>span){color:var(--portfolio-muted)}
+.portfolio-web .case-content :is(.research-grid p,.ui-copy>p,.logic ul){font-size:14px}
+.portfolio-web .case-content .native-section{border-color:var(--portfolio-line)}
+.portfolio-web .case-content :is(.research-grid article,.original-notes details,.logic,.type-demo){border-color:var(--portfolio-line)}
+.portfolio-web .case-content .flow li{background:var(--portfolio-panel)}
+.portfolio-web .case-content .playback-flow{background:var(--portfolio-panel)}
+.portfolio-web .case-content .original-notes summary{min-height:52px}
+html.theme-dark .portfolio-web .case-content :is(.ui-art,.research-image){background:var(--portfolio-panel);border-color:var(--portfolio-line)}
+html.theme-dark .portfolio-web .case-content .phone-gallery .ui-art{border-color:var(--portfolio-line)}
+@media(max-width:640px){.portfolio-web .case-content .swatches code{font-size:10px}}
+</style>
