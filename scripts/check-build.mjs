@@ -13,8 +13,8 @@ async function walk(dir) {
         const url = match[1];
         if (!url.startsWith('/') || url.startsWith('//')) continue;
         checked++;
-        if (!url.startsWith('/codex/')) { failures.push(`${path}: unprefixed ${url}`); continue; }
-        const local = join(root, decodeURIComponent(url.slice(7).split(/[?#]/)[0]));
+        if (url.startsWith('/codex/')) { failures.push(`${path}: obsolete /codex/ link ${url}`); continue; }
+        const local = join(root, decodeURIComponent(url.slice(1).split(/[?#]/)[0]));
         try { await stat(local); } catch { failures.push(`${path}: missing ${url}`); }
       }
       if (/mcp\.figma\.com\/mcp|localhost:4322/.test(text)) failures.push(`${path}: development URL`);
