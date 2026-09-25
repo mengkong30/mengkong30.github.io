@@ -1,6 +1,6 @@
 # TOK · 博客与设计作品集
 
-线上地址：https://mengkong30.github.io/
+线上地址：https://mengkong.online/
 
 Astro 静态网站。推送到 main 后，GitHub Actions 自动构建并发布到 GitHub Pages。
 

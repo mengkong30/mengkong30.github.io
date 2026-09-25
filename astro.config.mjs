@@ -2,7 +2,7 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
-const SITE_URL = 'https://mengkong30.github.io';
+const SITE_URL = 'https://mengkong.online';
 export default defineConfig({
 	server: { port: 4322 },
   markdown: {
