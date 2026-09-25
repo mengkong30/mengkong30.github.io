@@ -58,5 +58,17 @@
     "tag": "动效",
     "date": "2026-09-24",
     "mark": false
+  },
+  {
+    "id": "9",
+    "title": "宝箱打开动画临摹",
+    "desc": "宝箱升级与开启动效临摹 · 点击反馈、弹性回弹与星光流动",
+    "video": "/assets/projects/motion/treasure-chest-opening.mp4",
+    "url": "/project/treasure-chest-opening",
+    "detail": "/project/treasure-chest-opening",
+    "category": "motion",
+    "tag": "动效临摹",
+    "date": "2026-09-25",
+    "mark": false
   }
 ]
