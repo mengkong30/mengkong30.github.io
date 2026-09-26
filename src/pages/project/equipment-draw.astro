@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const title = '装备抽奖动画练习｜TOK';
+const video = '/assets/projects/motion/equipment-draw.mp4';
+---
+<BaseLayout title={title} description="装备抽奖动画练习：十件装备快速横向轮播，减速停中后以金色光圈、星芒与回弹揭晓结果，并提供可点击的交互体验。">
+  <main class="motion-work">
+    <div class="motion-shell">
+      <a class="back" href="/project">← 返回作品列表</a>
+      <header>
+        <p class="eyebrow">MOTION / 04</p>
+        <h1>装备抽奖动画练习</h1>
+        <p class="intro">十件装备横向轮播 · 减速停中与选中光效</p>
+      </header>
+      <figure class="video-frame">
+        <video src={video} controls playsinline preload="metadata" aria-label="播放 装备抽奖动画练习 动效作品">
+          浏览器暂不支持播放此视频。<a href={video}>打开视频文件</a>
+        </video>
+        <figcaption>点击播放，观看完整动效。</figcaption>
+      </figure>
+      <section class="interactive-experience" aria-labelledby="experience-title">
+        <h2 id="experience-title">实际体验</h2>
+        <p>点击画面抽取装备，等待轮播减速、停中并揭晓结果。点击继续可以再次抽取，也支持空格或回车。</p>
+        <iframe src="/experiences/equipment-draw/index.html" title="装备抽奖动画练习：实际体验" loading="lazy"></iframe>
+      </section>
+    </div>
+  </main>
+</BaseLayout>
+<style>
+  .motion-work{min-height:80vh;background:#111316;color:#f5f5f1;padding:42px 0 100px}
+  .motion-shell{width:min(1080px,calc(100% - 48px));margin:auto}
+  .back{display:inline-block;color:#aeb4b9;font-size:13px;text-decoration:none;padding:8px 0}
+  .back:hover{color:#fff}.back:focus-visible{outline:2px solid #fff;outline-offset:4px}
+  header{margin:74px 0 36px}.eyebrow{font-size:11px;letter-spacing:.18em;color:#9fa7ad;margin:0 0 16px}
+  h1{font-size:clamp(42px,6vw,80px);line-height:1.12;letter-spacing:-.05em;margin:0;font-weight:600}
+  .intro{font-size:14px;color:#9fa7ad;margin:18px 0 0}
+  .video-frame{margin:0}.video-frame video{display:block;width:100%;max-height:min(72vh,760px);background:#050506;object-fit:contain;border:1px solid #35383c;border-radius:10px}
+  figcaption{font-size:12px;color:#9fa7ad;margin-top:15px}
+  @media(max-width:640px){.motion-work{padding:22px 0 72px}.motion-shell{width:calc(100% - 32px)}header{margin:50px 0 25px}.video-frame video{max-height:70vh;border-radius:6px}}
+  .interactive-experience{margin-top:64px;padding-top:36px;border-top:1px solid #35383c}
+  .interactive-experience h2{scroll-margin-top:100px;font-size:28px;line-height:1.3;font-weight:600;margin:0 0 12px}
+  .interactive-experience p{font-size:14px;line-height:1.8;color:#9fa7ad;margin:0 0 24px}
+  .interactive-experience iframe{display:block;width:100%;height:720px;border:0;background:#15141b;border-radius:12px}
+  @media(max-width:640px){.interactive-experience{margin-top:42px;padding-top:28px}.interactive-experience h2{font-size:24px}}
+  .motion-work h1,.motion-work h2{color:#fff}
+</style>
+
