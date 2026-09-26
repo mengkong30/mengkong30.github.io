@@ -7,3 +7,5 @@ body.embed{background:transparent}body.embed main{padding:12px 16px;max-width:no
 .scene-head{top:7%;pointer-events:none}
 .scene-head span{font-size:clamp(14px,6.67cqw,22px);line-height:1.2}
 .scene-head p{font-size:clamp(8px,3cqw,10px);line-height:1.2;margin:8px 0 0}
+
+.pointer-light{position:absolute;z-index:6;pointer-events:none;width:52px;height:52px;border:1.5px solid #fff2bb;border-radius:50%;background:radial-gradient(circle,#fffdebc9 0%,#ffe89263 30%,transparent 69%);box-shadow:0 0 20px #ffe79380;opacity:0;transform:translate(-50%,-50%)}
