@@ -70,5 +70,17 @@
     "tag": "动效临摹",
     "date": "2026-09-25",
     "mark": false
+  },
+  {
+    "id": "10",
+    "title": "装备抽奖动画练习",
+    "desc": "十件装备横向轮播 · 减速停中与选中光效 · 可交互体验",
+    "video": "/assets/projects/motion/equipment-draw.mp4",
+    "url": "/project/equipment-draw",
+    "detail": "/project/equipment-draw",
+    "category": "motion",
+    "tag": "动效练习",
+    "date": "2026-09-26",
+    "mark": false
   }
 ]
