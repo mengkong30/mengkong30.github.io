@@ -1,0 +1,53 @@
+<p class="visitor-count" title="按不蒜子 UV 规则估算访客数，非精确真人数；历史未采集的访问不计入。">
+  <span>访客人数</span>
+  <span aria-hidden="true">·</span>
+  <span id="visitor-count-status" role="status">加载中…</span>
+  <span id="visitor-count-result" hidden><span id="busuanzi_value_site_uv"></span> 人</span>
+  <a href="https://ibruce.info/2015/04/04/busuanzi/" target="_blank" rel="noopener noreferrer" aria-label="访客统计由不蒜子提供，查看统计说明">不蒜子统计</a>
+</p>
+<noscript><p class="visitor-count">启用 JavaScript 后可查看访客人数。</p></noscript>
+
+<script>
+  const value = document.getElementById('busuanzi_value_site_uv');
+  const result = document.getElementById('visitor-count-result');
+  const status = document.getElementById('visitor-count-status');
+  if (value && result && status) {
+    // Development previews must not create unrelated counts for localhost.
+    if (!['mengkong.online', 'mengkong30.github.io'].includes(location.hostname)) {
+      status.textContent = '本地预览不计数';
+    } else {
+      let received = false;
+      const unavailable = () => { if (!received) status.textContent = '暂不可用'; };
+      const timer = window.setTimeout(unavailable, 10000);
+      const observer = new MutationObserver(() => {
+        const count = value.textContent?.trim() ?? '';
+        if (!/^\d+$/.test(count)) return;
+        received = true;
+        window.clearTimeout(timer);
+        observer.disconnect();
+        result.hidden = false;
+        status.textContent = `已记录 ${count} 位访客`;
+        status.hidden = true;
+      });
+      observer.observe(value, { childList: true, characterData: true, subtree: true });
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
+      script.onerror = () => {
+        window.clearTimeout(timer);
+        observer.disconnect();
+        unavailable();
+      };
+      document.head.appendChild(script);
+    }
+  }
+</script>
+
+<style>
+  .visitor-count { display: flex; justify-content: center; align-items: baseline; flex-wrap: wrap; gap: .45rem; margin: .65rem 0 0; font-size: .8125rem; color: var(--color-400); }
+  #busuanzi_value_site_uv { font-variant-numeric: tabular-nums; color: var(--color-200); }
+  [hidden] { display: none !important; }
+  a { margin-left: .35rem; color: inherit; text-decoration: none; font-size: .75rem; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  a:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+</style>
