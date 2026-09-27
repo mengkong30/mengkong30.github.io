@@ -21,6 +21,7 @@ export const nav: Nav = {
         { label: '首页', href: '/', target: '_self' },// target 为 '_blank' 打开新链接
         { label: '项目', href: '/project', target: '_self' },
         { label: '博客', href: '/blog', target: '_self' },
+        { label: '插件', href: '/plugins', target: '_self' },
     ],
 };
 

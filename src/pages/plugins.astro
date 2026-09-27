@@ -1,0 +1,49 @@
+---
+import BlogPostLayout from '../layouts/BlogPostLayout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+---
+
+<BlogPostLayout title="插件与工具｜TOK" description="把设计实验做成可以直接使用的小工具。在线体验环带工作室，自定义三维环带动效。">
+  <main class="post-wrapper">
+    <SectionHeader tag="Tools" description="把设计实验做成可以直接使用的小工具。">插件</SectionHeader>
+    <section class="tool-list" aria-label="插件与在线工具">
+      <article class="tool">
+        <div class="ring-mark" aria-hidden="true">
+          <svg viewBox="0 0 120 120" fill="none"><ellipse cx="60" cy="60" rx="44" ry="23" transform="rotate(-28 60 60)" stroke="currentColor" stroke-width="13"/><ellipse cx="60" cy="60" rx="44" ry="23" transform="rotate(-28 60 60)" stroke="var(--color-999)" stroke-width="1" stroke-dasharray="2 26"/></svg>
+        </div>
+        <div class="tool-content">
+          <div class="tool-heading"><h2>环带工作室</h2><span class="version">1.0</span></div>
+          <p class="english-name">Ring Studio · 在线动效工具</p>
+          <p>在浏览器里调整圆环角度、大小与灯光，编辑图表或换上自己的页面，实时预览三维环带动效。</p>
+          <p class="tool-note">无需安装 · 支持保存项目与导出 PNG · 暂不支持视频导出</p>
+          <div class="tool-actions">
+            <a class="launch" href="https://mengkong.online/ring-studio/" target="_blank" rel="noopener noreferrer">打开环带工作室 <span aria-hidden="true">↗</span></a>
+            <a class="details" href="/blog/ring-studio-1-0/">阅读 1.0 介绍 <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+</BlogPostLayout>
+
+<style>
+  .tool-list { border-top: 1px solid var(--border); padding-top: 32px; }
+  .tool { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 32px; padding: 8px 0 32px; }
+  .ring-mark { color: var(--color-100); padding-top: 8px; }
+  .ring-mark svg { width: 120px; height: 120px; }
+  .tool-heading { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .tool-heading h2 { margin: 0; font-size: 1.6rem; color: var(--color-100); }
+  .version { border: 1px solid var(--border); border-radius: 5px; padding: 2px 8px; font-size: .75rem; color: var(--color-300); }
+  .english-name { margin-top: 6px; color: var(--color-300); font-size: .875rem; }
+  .tool-note { color: var(--color-300); font-size: .875rem; }
+  .tool-actions { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; margin-top: 24px; }
+  .launch { display: inline-flex; align-items: center; gap: 16px; padding: 12px 18px; border-radius: 8px; background: var(--color-100); color: var(--color-999); text-decoration: none; font-weight: 500; }
+  .launch:hover { opacity: .85; }
+  .details { color: var(--color-100); text-underline-offset: 5px; }
+  a:focus-visible { outline: 2px solid var(--color-100); outline-offset: 5px; }
+  @media (max-width: 600px) {
+    .tool { grid-template-columns: 1fr; gap: 12px; }
+    .ring-mark svg { width: 80px; height: 80px; }
+    .tool-actions { gap: 20px; align-items: flex-start; flex-direction: column; }
+  }
+</style>
