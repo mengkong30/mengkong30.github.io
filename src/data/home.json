@@ -82,5 +82,17 @@
     "tag": "动效练习",
     "date": "2026-09-26",
     "mark": false
+  },
+  {
+    "id": "11",
+    "title": "ai制作人物小动画测试",
+    "desc": "人物 IP 表情动画 · 身体弹性、五官跟随与手脚配合",
+    "video": "/assets/projects/motion/ai-character-animation-test.mp4",
+    "url": "/project/ai-character-animation-test",
+    "detail": "/project/ai-character-animation-test",
+    "category": "motion",
+    "tag": "人物动效",
+    "date": "2026-09-27",
+    "mark": false
   }
 ]
