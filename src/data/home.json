@@ -94,5 +94,17 @@
     "tag": "人物动效",
     "date": "2026-09-27",
     "mark": false
+  },
+  {
+    "id": "12",
+    "cover": "/assets/projects/watch-case/watch.png",
+    "title": "智能手表 · 抬腕看懂",
+    "desc": "健康与轻运动界面设计 · 从总览、详情到完整状态",
+    "url": "/project/smart-watch",
+    "detail": "/project/smart-watch",
+    "category": "recommend,ui",
+    "tag": "UI / UX",
+    "date": "2026-10-02",
+    "mark": true
   }
 ]
