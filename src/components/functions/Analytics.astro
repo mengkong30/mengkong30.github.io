@@ -1,35 +1,39 @@
 ---
-const gaId = import.meta.env.PUBLIC_GA4_ID;
-const UMAMIId = import.meta.env.PUBLIC_UMAMI_ID;
-// const gaId = '';
-
-if (!gaId) {
-    //console.warn("Google Analytics ID (PUBLIC_GA4_ID) is missing!");
-}
-
-if (!UMAMIId) {
-    //console.warn("Umami ID (PUBLIC_UMAMI_ID) is missing!");
-}
+// Public tracking identifier, supplied by the site owner (not an API credential).
+const websiteId = import.meta.env.PUBLIC_UMAMI_ID?.trim() || 'd333c63c-acb1-4bad-874c-fd3b2787b891';
 ---
-
-<!-- GA4 跟踪代码 -->
-{gaId && (
-    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} ></script>
-    <script is:inline define:vars={{ gaId }}>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', gaId);
-    </script>
-)}
-
-<!-- UMAMIId 跟踪代码 -->
-{UMAMIId && (
-    <script
-        is:inline
-        async
-        defer
-        data-website-id={UMAMIId}
-        src="https://cloud.umami.is/script.js"
-    ></script>
-)}
+{import.meta.env.PROD && websiteId && <script is:inline define:vars={{ websiteId }}>
+  (() => {
+    if (location.hostname !== 'mengkong.online') return;
+    try {
+      const preference = new URL(location.href).searchParams.get('analytics');
+      if (preference === 'off') localStorage.setItem('umami.disabled', '1');
+      if (preference === 'on') localStorage.removeItem('umami.disabled');
+      // Preference links never count as page views.
+      if (preference === 'off' || preference === 'on') return;
+      if (localStorage.getItem('umami.disabled')) return;
+    } catch { return; }
+    if (document.getElementById('umami-tracker')) return;
+    const script = document.createElement('script');
+    script.id = 'umami-tracker';
+    script.async = true;
+    script.src = 'https://cloud.umami.is/script.js';
+    script.dataset.websiteId = websiteId;
+    script.dataset.domains = 'mengkong.online';
+    script.dataset.doNotTrack = 'true';
+    script.dataset.excludeHash = 'true';
+    script.dataset.excludeSearch = 'true';
+    // Referrer URLs may also carry personal data in query strings or fragments.
+    window.blogAnalyticsBeforeSend = (type, payload) => {
+      if (payload.referrer) {
+        try {
+          const referrer = new URL(payload.referrer);
+          payload.referrer = referrer.origin;
+        } catch { payload.referrer = ''; }
+      }
+      return payload;
+    };
+    script.dataset.beforeSend = 'blogAnalyticsBeforeSend';
+    document.head.appendChild(script);
+  })();
+</script>}

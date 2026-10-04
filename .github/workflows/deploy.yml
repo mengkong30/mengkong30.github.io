@@ -27,6 +27,7 @@ jobs:
       - run: npm run build
         env:
           ASTRO_TELEMETRY_DISABLED: 1
+          PUBLIC_UMAMI_ID: ${{ vars.PUBLIC_UMAMI_ID }}
       - run: node scripts/check-build.mjs
       - uses: actions/upload-pages-artifact@v3
         with:
