@@ -5,7 +5,11 @@
     "width": 1600,
     "height": 1520,
     "src": "/assets/projects/dinggao/chapter-01.webp",
-    "small": "/assets/projects/dinggao/chapter-01-800.webp"
+    "small": "/assets/projects/dinggao/chapter-01-800.webp",
+    "hd": "/assets/projects/dinggao/chapter-01-hd.webp",
+    "retina": "/assets/projects/dinggao/chapter-01-2400.webp",
+    "hdWidth": 4800,
+    "hdHeight": 4560
   },
   {
     "number": "02",
@@ -13,7 +17,11 @@
     "width": 1600,
     "height": 1160,
     "src": "/assets/projects/dinggao/chapter-02.webp",
-    "small": "/assets/projects/dinggao/chapter-02-800.webp"
+    "small": "/assets/projects/dinggao/chapter-02-800.webp",
+    "hd": "/assets/projects/dinggao/chapter-02-hd.webp",
+    "retina": "/assets/projects/dinggao/chapter-02-2400.webp",
+    "hdWidth": 4800,
+    "hdHeight": 3480
   },
   {
     "number": "03",
@@ -21,7 +29,11 @@
     "width": 1600,
     "height": 1150,
     "src": "/assets/projects/dinggao/chapter-03.webp",
-    "small": "/assets/projects/dinggao/chapter-03-800.webp"
+    "small": "/assets/projects/dinggao/chapter-03-800.webp",
+    "hd": "/assets/projects/dinggao/chapter-03-hd.webp",
+    "retina": "/assets/projects/dinggao/chapter-03-2400.webp",
+    "hdWidth": 4800,
+    "hdHeight": 3450
   },
   {
     "number": "04",
@@ -29,7 +41,11 @@
     "width": 1600,
     "height": 1080,
     "src": "/assets/projects/dinggao/chapter-04.webp",
-    "small": "/assets/projects/dinggao/chapter-04-800.webp"
+    "small": "/assets/projects/dinggao/chapter-04-800.webp",
+    "hd": "/assets/projects/dinggao/chapter-04-hd.webp",
+    "retina": "/assets/projects/dinggao/chapter-04-2400.webp",
+    "hdWidth": 4800,
+    "hdHeight": 3240
   },
   {
     "number": "05",
@@ -37,7 +53,11 @@
     "width": 1600,
     "height": 1660,
     "src": "/assets/projects/dinggao/chapter-05.webp",
-    "small": "/assets/projects/dinggao/chapter-05-800.webp"
+    "small": "/assets/projects/dinggao/chapter-05-800.webp",
+    "hd": "/assets/projects/dinggao/chapter-05-hd.webp",
+    "retina": "/assets/projects/dinggao/chapter-05-2400.webp",
+    "hdWidth": 4800,
+    "hdHeight": 4980
   },
   {
     "number": "06",
@@ -45,7 +65,11 @@
     "width": 1600,
     "height": 1680,
     "src": "/assets/projects/dinggao/chapter-06.webp",
-    "small": "/assets/projects/dinggao/chapter-06-800.webp"
+    "small": "/assets/projects/dinggao/chapter-06-800.webp",
+    "hd": "/assets/projects/dinggao/chapter-06-hd.webp",
+    "retina": "/assets/projects/dinggao/chapter-06-2400.webp",
+    "hdWidth": 4800,
+    "hdHeight": 5040
   },
   {
     "number": "07",
@@ -53,7 +77,11 @@
     "width": 1600,
     "height": 1660,
     "src": "/assets/projects/dinggao/chapter-07.webp",
-    "small": "/assets/projects/dinggao/chapter-07-800.webp"
+    "small": "/assets/projects/dinggao/chapter-07-800.webp",
+    "hd": "/assets/projects/dinggao/chapter-07-hd.webp",
+    "retina": "/assets/projects/dinggao/chapter-07-2400.webp",
+    "hdWidth": 4800,
+    "hdHeight": 4980
   },
   {
     "number": "08",
@@ -61,7 +89,11 @@
     "width": 1600,
     "height": 1430,
     "src": "/assets/projects/dinggao/chapter-08.webp",
-    "small": "/assets/projects/dinggao/chapter-08-800.webp"
+    "small": "/assets/projects/dinggao/chapter-08-800.webp",
+    "hd": "/assets/projects/dinggao/chapter-08-hd.webp",
+    "retina": "/assets/projects/dinggao/chapter-08-2400.webp",
+    "hdWidth": 4800,
+    "hdHeight": 4290
   },
   {
     "number": "09",
@@ -69,7 +101,11 @@
     "width": 1600,
     "height": 1320,
     "src": "/assets/projects/dinggao/chapter-09.webp",
-    "small": "/assets/projects/dinggao/chapter-09-800.webp"
+    "small": "/assets/projects/dinggao/chapter-09-800.webp",
+    "hd": "/assets/projects/dinggao/chapter-09-hd.webp",
+    "retina": "/assets/projects/dinggao/chapter-09-2400.webp",
+    "hdWidth": 4800,
+    "hdHeight": 3960
   },
   {
     "number": "10",
@@ -77,7 +113,11 @@
     "width": 1600,
     "height": 1700,
     "src": "/assets/projects/dinggao/chapter-10.webp",
-    "small": "/assets/projects/dinggao/chapter-10-800.webp"
+    "small": "/assets/projects/dinggao/chapter-10-800.webp",
+    "hd": "/assets/projects/dinggao/chapter-10-hd.webp",
+    "retina": "/assets/projects/dinggao/chapter-10-2400.webp",
+    "hdWidth": 4800,
+    "hdHeight": 5100
   },
   {
     "number": "11",
@@ -85,7 +125,11 @@
     "width": 1600,
     "height": 1430,
     "src": "/assets/projects/dinggao/chapter-11.webp",
-    "small": "/assets/projects/dinggao/chapter-11-800.webp"
+    "small": "/assets/projects/dinggao/chapter-11-800.webp",
+    "hd": "/assets/projects/dinggao/chapter-11-hd.webp",
+    "retina": "/assets/projects/dinggao/chapter-11-2400.webp",
+    "hdWidth": 4800,
+    "hdHeight": 4290
   },
   {
     "number": "12",
@@ -93,7 +137,11 @@
     "width": 1600,
     "height": 1450,
     "src": "/assets/projects/dinggao/chapter-12.webp",
-    "small": "/assets/projects/dinggao/chapter-12-800.webp"
+    "small": "/assets/projects/dinggao/chapter-12-800.webp",
+    "hd": "/assets/projects/dinggao/chapter-12-hd.webp",
+    "retina": "/assets/projects/dinggao/chapter-12-2400.webp",
+    "hdWidth": 4800,
+    "hdHeight": 4350
   },
   {
     "number": "13",
@@ -101,7 +149,11 @@
     "width": 1600,
     "height": 1490,
     "src": "/assets/projects/dinggao/chapter-13.webp",
-    "small": "/assets/projects/dinggao/chapter-13-800.webp"
+    "small": "/assets/projects/dinggao/chapter-13-800.webp",
+    "hd": "/assets/projects/dinggao/chapter-13-hd.webp",
+    "retina": "/assets/projects/dinggao/chapter-13-2400.webp",
+    "hdWidth": 4800,
+    "hdHeight": 4470
   },
   {
     "number": "14",
@@ -109,7 +161,11 @@
     "width": 1600,
     "height": 1320,
     "src": "/assets/projects/dinggao/chapter-14.webp",
-    "small": "/assets/projects/dinggao/chapter-14-800.webp"
+    "small": "/assets/projects/dinggao/chapter-14-800.webp",
+    "hd": "/assets/projects/dinggao/chapter-14-hd.webp",
+    "retina": "/assets/projects/dinggao/chapter-14-2400.webp",
+    "hdWidth": 4800,
+    "hdHeight": 3960
   },
   {
     "number": "15",
@@ -117,7 +173,11 @@
     "width": 1600,
     "height": 1360,
     "src": "/assets/projects/dinggao/chapter-15.webp",
-    "small": "/assets/projects/dinggao/chapter-15-800.webp"
+    "small": "/assets/projects/dinggao/chapter-15-800.webp",
+    "hd": "/assets/projects/dinggao/chapter-15-hd.webp",
+    "retina": "/assets/projects/dinggao/chapter-15-2400.webp",
+    "hdWidth": 4800,
+    "hdHeight": 4080
   },
   {
     "number": "16",
@@ -125,7 +185,11 @@
     "width": 1600,
     "height": 1310,
     "src": "/assets/projects/dinggao/chapter-16.webp",
-    "small": "/assets/projects/dinggao/chapter-16-800.webp"
+    "small": "/assets/projects/dinggao/chapter-16-800.webp",
+    "hd": "/assets/projects/dinggao/chapter-16-hd.webp",
+    "retina": "/assets/projects/dinggao/chapter-16-2400.webp",
+    "hdWidth": 4800,
+    "hdHeight": 3930
   },
   {
     "number": "17",
@@ -133,7 +197,11 @@
     "width": 1600,
     "height": 1450,
     "src": "/assets/projects/dinggao/chapter-17.webp",
-    "small": "/assets/projects/dinggao/chapter-17-800.webp"
+    "small": "/assets/projects/dinggao/chapter-17-800.webp",
+    "hd": "/assets/projects/dinggao/chapter-17-hd.webp",
+    "retina": "/assets/projects/dinggao/chapter-17-2400.webp",
+    "hdWidth": 4800,
+    "hdHeight": 4350
   },
   {
     "number": "18",
@@ -141,7 +209,11 @@
     "width": 1600,
     "height": 1570,
     "src": "/assets/projects/dinggao/chapter-18.webp",
-    "small": "/assets/projects/dinggao/chapter-18-800.webp"
+    "small": "/assets/projects/dinggao/chapter-18-800.webp",
+    "hd": "/assets/projects/dinggao/chapter-18-hd.webp",
+    "retina": "/assets/projects/dinggao/chapter-18-2400.webp",
+    "hdWidth": 4800,
+    "hdHeight": 4710
   },
   {
     "number": "19",
@@ -149,7 +221,11 @@
     "width": 1600,
     "height": 1570,
     "src": "/assets/projects/dinggao/chapter-19.webp",
-    "small": "/assets/projects/dinggao/chapter-19-800.webp"
+    "small": "/assets/projects/dinggao/chapter-19-800.webp",
+    "hd": "/assets/projects/dinggao/chapter-19-hd.webp",
+    "retina": "/assets/projects/dinggao/chapter-19-2400.webp",
+    "hdWidth": 4800,
+    "hdHeight": 4710
   },
   {
     "number": "20",
@@ -157,7 +233,11 @@
     "width": 1600,
     "height": 1250,
     "src": "/assets/projects/dinggao/chapter-20.webp",
-    "small": "/assets/projects/dinggao/chapter-20-800.webp"
+    "small": "/assets/projects/dinggao/chapter-20-800.webp",
+    "hd": "/assets/projects/dinggao/chapter-20-hd.webp",
+    "retina": "/assets/projects/dinggao/chapter-20-2400.webp",
+    "hdWidth": 4800,
+    "hdHeight": 3750
   },
   {
     "number": "21",
@@ -165,6 +245,10 @@
     "width": 1600,
     "height": 1260,
     "src": "/assets/projects/dinggao/chapter-21.webp",
-    "small": "/assets/projects/dinggao/chapter-21-800.webp"
+    "small": "/assets/projects/dinggao/chapter-21-800.webp",
+    "hd": "/assets/projects/dinggao/chapter-21-hd.webp",
+    "retina": "/assets/projects/dinggao/chapter-21-2400.webp",
+    "hdWidth": 4800,
+    "hdHeight": 3780
   }
 ]

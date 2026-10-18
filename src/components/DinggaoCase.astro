@@ -43,17 +43,17 @@ const descriptions=[
  <div class="chapter-gallery">
   {groups.map(g=><section id={g.id} class="chapter-group" aria-label={g.label}>
    {chapters.slice(g.start-1,g.end).map((c)=><figure class="chapter" id={'chapter-'+c.number}>
-    <figcaption><h2><span>{c.number}</span>{c.title}</h2><a href={c.src} target="_blank" rel="noopener" data-open-chapter={c.number} aria-label={'放大查看第 '+c.number+' 章：'+c.title}>放大查看 ↗</a></figcaption>
-    <a class="chapter-image" href={c.src} target="_blank" rel="noopener" data-open-chapter={c.number} aria-label={'放大查看：'+c.title}>
-     <img src={c.src} srcset={`${c.small} 800w, ${c.src} 1600w`} sizes="(max-width: 800px) 100vw, (max-width: 1504px) calc(100vw - 64px), 1440px" width={c.width} height={c.height} alt={descriptions[Number(c.number)-1]} loading={c.number==='01'?'eager':'lazy'} fetchpriority={c.number==='01'?'high':undefined} decoding="async" />
+    <figcaption><h2><span>{c.number}</span>{c.title}</h2><a href={c.hd} target="_blank" rel="noopener" data-open-chapter={c.number} aria-label={'放大查看第 '+c.number+' 章：'+c.title}>放大查看 ↗</a></figcaption>
+    <a class="chapter-image" href={c.hd} target="_blank" rel="noopener" data-open-chapter={c.number} aria-label={'放大查看：'+c.title}>
+     <img src={c.src} srcset={`${c.small} 800w, ${c.src} 1600w, ${c.retina} 2400w`} sizes="(max-width: 800px) 100vw, (max-width: 1504px) calc(100vw - 64px), 1440px" width={c.width} height={c.height} alt={descriptions[Number(c.number)-1]} loading={c.number==='01'?'eager':'lazy'} fetchpriority={c.number==='01'?'high':undefined} decoding="async" />
     </a>
    </figure>)}
   </section>)}
  </div>
  <footer class="case-ending"><p class="eyebrow">THANK YOU FOR READING</p><h2>让协作有序，<br/>让定稿有据。</h2><p>个人概念项目。场景与问题来自设计假设，展示素材用于演示；<br/>当前为静态高保真方案，尚未进行真实用户测试。</p><div><a href="#dinggao-top">返回顶部 ↑</a><a href="/project">继续看作品 →</a></div></footer>
  <dialog class="chapter-viewer" aria-labelledby="viewer-title">
-  <div class="viewer-toolbar"><h2 id="viewer-title">作品集大图</h2><span class="viewer-count" aria-live="polite"></span><button type="button" data-size aria-pressed="false">实际尺寸</button><button type="button" data-prev aria-label="上一章">←</button><button type="button" data-next aria-label="下一章">→</button><button type="button" data-close aria-label="关闭大图">关闭 ×</button></div>
-  <div class="viewer-canvas"><img class="viewer-image" alt="" /></div>
+  <div class="viewer-toolbar"><h2 id="viewer-title">作品集大图</h2><span class="viewer-count" aria-live="polite"></span><button type="button" data-size aria-pressed="false">100% 查看</button><button type="button" data-zoom-out aria-label="缩小图片">−</button><span class="viewer-zoom" aria-live="polite">适应宽度</span><button type="button" data-zoom-in aria-label="放大图片">＋</button><button type="button" data-prev aria-label="上一章">←</button><button type="button" data-next aria-label="下一章">→</button><button type="button" data-close aria-label="关闭大图">关闭 ×</button></div>
+  <div class="viewer-canvas"><img class="viewer-image" alt="" draggable="false" /></div>
   <p class="viewer-status" role="status">正在加载大图…</p>
  </dialog>
  <script type="application/json" id="dinggao-chapters" set:html={JSON.stringify(chapters.map((c,i)=>({...c,alt:descriptions[i]})))} />
@@ -73,13 +73,32 @@ const descriptions=[
   const size=dialog.querySelector<HTMLButtonElement>('[data-size]')!;
   const prev=dialog.querySelector<HTMLButtonElement>('[data-prev]')!;
   const next=dialog.querySelector<HTMLButtonElement>('[data-next]')!;
-  let index=0,trigger:HTMLElement|null=null,scrollOverflow='';
+  const zoomIn=dialog.querySelector<HTMLButtonElement>('[data-zoom-in]')!;
+  const zoomOut=dialog.querySelector<HTMLButtonElement>('[data-zoom-out]')!;
+  const zoomLabel=dialog.querySelector<HTMLElement>('.viewer-zoom')!;
+  let index=0,trigger:HTMLElement|null=null,scrollOverflow='',scale=1,fit=true;
+  const steps=[.25,.5,.75,1,1.5,2,3];
+  function setZoom(value:number,fitWidth=false){
+   const oldWidth=image.getBoundingClientRect().width||1600;
+   const cx=(canvas.scrollLeft+canvas.clientWidth/2)/oldWidth;
+   const cy=(canvas.scrollTop+canvas.clientHeight/2)/oldWidth;
+   fit=fitWidth;scale=Math.max(.1,Math.min(3,value));
+   image.style.width=(1600*scale)+'px';
+   zoomLabel.textContent=Math.round(scale*100)+'%';
+   size.textContent=fit?'100% 查看':'适应宽度';size.setAttribute('aria-pressed',String(!fit));
+   zoomOut.disabled=scale<=.25;zoomIn.disabled=scale>=3;
+   canvas.scrollTo(Math.max(0,cx*1600*scale-canvas.clientWidth/2),Math.max(0,cy*1600*scale-canvas.clientHeight/2));
+  }
+  function fitImage(){const padding=parseFloat(getComputedStyle(canvas).paddingLeft)*2;setZoom(Math.min(1,(canvas.clientWidth-padding)/1600),true);}
+  zoomIn.addEventListener('click',()=>setZoom(steps.find(n=>n>scale+.01)||3));
+  zoomOut.addEventListener('click',()=>setZoom([...steps].reverse().find(n=>n<scale-.01)||.25));
+  new ResizeObserver(()=>{if(dialog.open&&fit)fitImage();}).observe(canvas);
   function show(i:number){
    index=i;const c=data[i];title.textContent=c.title;count.textContent=`${i+1} / ${data.length}`;
    status.textContent='正在加载大图…';status.hidden=false;
-   image.alt=c.alt;image.src=c.src;image.width=c.width;image.height=c.height;
+   image.alt=c.alt;image.src=c.hd;image.width=c.hdWidth;image.height=c.hdHeight;
    prev.disabled=i===0;next.disabled=i===data.length-1;
-   canvas.classList.remove('actual-size');size.setAttribute('aria-pressed','false');size.textContent='实际尺寸';canvas.scrollTo(0,0);
+   fit=true;requestAnimationFrame(()=>{fitImage();canvas.scrollTo(0,0);});
   }
   image.addEventListener('load',()=>status.hidden=true);
   image.addEventListener('error',()=>{status.textContent='图片加载失败，请重新打开本章或刷新页面。';status.hidden=false;});
@@ -90,7 +109,11 @@ const descriptions=[
   dialog.querySelector('[data-close]')!.addEventListener('click',()=>dialog.close());
   dialog.addEventListener('close',()=>{document.body.style.overflow=scrollOverflow;trigger?.focus({preventScroll:true});});
   prev.addEventListener('click',()=>{if(index>0)show(index-1);});next.addEventListener('click',()=>{if(index<data.length-1)show(index+1);});
-  size.addEventListener('click',()=>{const on=canvas.classList.toggle('actual-size');size.setAttribute('aria-pressed',String(on));size.textContent=on?'适应宽度':'实际尺寸';});
+  size.addEventListener('click',()=>{if(fit)setZoom(1);else fitImage();});
+  let drag:{x:number,y:number,left:number,top:number}|null=null;
+  canvas.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse'||e.button!==0)return;drag={x:e.clientX,y:e.clientY,left:canvas.scrollLeft,top:canvas.scrollTop};canvas.setPointerCapture(e.pointerId);canvas.classList.add('dragging');e.preventDefault();});
+  canvas.addEventListener('pointermove',e=>{if(drag)canvas.scrollTo(drag.left+drag.x-e.clientX,drag.top+drag.y-e.clientY);});
+  const endDrag=()=>{drag=null;canvas.classList.remove('dragging');};canvas.addEventListener('pointerup',endDrag);canvas.addEventListener('pointercancel',endDrag);
   dialog.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'&&index>0){e.preventDefault();show(index-1);}if(e.key==='ArrowRight'&&index<data.length-1){e.preventDefault();show(index+1);}});
   const links=root.querySelectorAll<HTMLAnchorElement>('.chapter-nav a');
   const observer=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){links.forEach(a=>{if(a.hash==='#'+entry.target.id)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});}},{rootMargin:'-15% 0px -65% 0px'});
@@ -105,7 +128,8 @@ const descriptions=[
  .chapter-nav{position:sticky;top:var(--site-nav-height,80px);z-index:5;background:#f3f7faf5;border-block:1px solid #dde6ed}.chapter-nav>div{max-width:1440px;margin:auto;display:flex;gap:30px;padding:0 64px;overflow-x:auto}.chapter-nav a{white-space:nowrap;padding:18px 0;font-size:14px;color:var(--case-muted);border-bottom:2px solid transparent}.chapter-nav a:hover,.chapter-nav a[aria-current]{color:var(--case-blue);border-color:var(--case-blue)}
  .chapter-gallery{max-width:1504px;padding:32px;margin:auto}.chapter-group{scroll-margin-top:calc(var(--site-nav-height,80px) + 72px)}.chapter{margin:0 0 42px!important;scroll-margin-top:80px}.chapter figcaption{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px 4px 16px}.chapter h2{font-size:16px;font-weight:500;line-height:1.6;letter-spacing:0;color:var(--case-ink)}.chapter h2 span{color:var(--case-blue);margin-right:20px;font-size:13px;font-variant-numeric:tabular-nums}.chapter figcaption>a{font-size:12px;color:var(--case-muted);white-space:nowrap;padding:8px 0}.chapter-image{display:block;cursor:zoom-in;background:#e0edf6;overflow:hidden}.chapter-image img{width:100%;height:auto;display:block}.chapter-image:hover{outline:1px solid #a0bfd4;outline-offset:3px}
  .case-ending{background:#172b3a;color:#d5e6f2;padding:80px max(32px,calc((100vw - 1312px)/2)) 90px}.case-ending .eyebrow{margin-top:0!important;color:#9cc5de}.dinggao-case .case-ending h2{color:#fff;font-size:clamp(35px,5vw,64px);line-height:1.5;margin:24px 0 28px;font-weight:650}.case-ending p{font-size:14px;line-height:1.9}.case-ending>div{display:flex;gap:35px;margin-top:36px;flex-wrap:wrap}.case-ending a{padding:12px 0;border-bottom:1px solid #627f93;font-size:15px}
- .chapter-viewer{position:fixed;inset:0;width:100%;max-width:none;height:100dvh;max-height:none;padding:0;margin:0;border:0;background:#0e1c28;color:#fff;overflow:hidden}.chapter-viewer::backdrop{background:#0e1c28}.viewer-toolbar{height:76px;display:flex;align-items:center;gap:12px;padding:14px 24px;border-bottom:1px solid #344c5f;background:#172b3a}.dinggao-case .viewer-toolbar h2{font-size:16px;line-height:1.5;color:#fff;font-weight:500;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.viewer-count{font-size:13px;color:#bad0df;white-space:nowrap}.viewer-toolbar button{background:#233e51;color:#fff;border:1px solid #486375;border-radius:5px;padding:10px 14px;min-width:44px;min-height:44px;cursor:pointer;font-size:13px;white-space:nowrap}.viewer-toolbar button:disabled{opacity:.4;cursor:default}.viewer-canvas{height:calc(100dvh - 76px);overflow:auto;padding:24px;overscroll-behavior:contain}.viewer-image{display:block;width:min(100%,1600px);max-width:none;height:auto;margin:0 auto}.viewer-canvas.actual-size .viewer-image{width:1600px;margin:0 auto}.viewer-status{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:#172b3a;padding:12px 20px;font-size:14px;border:1px solid #486375}
+ .chapter-viewer{position:fixed;inset:0;width:100%;max-width:none;height:100dvh;max-height:none;padding:0;margin:0;border:0;background:#0e1c28;color:#fff;overflow:hidden}.chapter-viewer::backdrop{background:#0e1c28}.viewer-toolbar{height:76px;display:flex;align-items:center;gap:12px;padding:14px 24px;border-bottom:1px solid #344c5f;background:#172b3a}.dinggao-case .viewer-toolbar h2{font-size:16px;line-height:1.5;color:#fff;font-weight:500;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.viewer-count{font-size:13px;color:#bad0df;white-space:nowrap}.viewer-toolbar button{background:#233e51;color:#fff;border:1px solid #486375;border-radius:5px;padding:10px 14px;min-width:44px;min-height:44px;cursor:pointer;font-size:13px;white-space:nowrap}.viewer-toolbar button:disabled{opacity:.4;cursor:default}.viewer-canvas{height:calc(100dvh - 76px);overflow:auto;padding:24px;overscroll-behavior:contain;cursor:grab;touch-action:pan-x pan-y pinch-zoom}.viewer-canvas.dragging{cursor:grabbing}.viewer-image{display:block;width:min(100%,1600px);max-width:none;height:auto;margin:0 auto}.viewer-zoom{font-size:13px;min-width:42px;text-align:center;color:#bad0df}.viewer-status{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:#172b3a;padding:12px 20px;font-size:14px;border:1px solid #486375}
  :global(.theme-dark) .dinggao-case{--case-bg:#152632;--case-ink:#e0ebf3;--case-muted:#b0c4d3;--case-blue:#9cc5de}:global(.theme-dark) .chapter-nav{background:#152632f5;border-color:#344c5f}:global(.theme-dark) .project-summary{border-color:#344c5f}
- @media(max-width:800px){.case-intro{padding:34px 24px 26px}.eyebrow{margin-top:36px!important;font-size:11px}.intro-grid{grid-template-columns:1fr;gap:28px}.intro-aside{justify-self:start;max-width:none;width:100%;font-size:16px}.intro-aside br{display:none}.scope{margin-top:14px!important}.reading-link{margin-top:12px}.project-summary{margin-top:30px;gap:12px 22px;font-size:12px}.chapter-nav>div{padding:0 24px;gap:24px}.chapter-nav a{font-size:13px;padding:16px 0}.chapter-gallery{padding:20px 0}.chapter{margin-bottom:24px!important}.chapter figcaption{padding:8px 18px 12px;gap:12px}.chapter h2{font-size:13px}.chapter h2 span{margin-right:10px;font-size:11px}.chapter figcaption>a{font-size:11px;min-width:65px;min-height:44px;display:flex;align-items:center}.case-ending{padding:52px 24px}.viewer-toolbar{height:112px;padding:12px;gap:6px;flex-wrap:wrap}.dinggao-case .viewer-toolbar h2{flex-basis:calc(100% - 80px);font-size:14px}.viewer-toolbar button{padding:9px 12px}.viewer-count{margin-left:auto}.viewer-canvas{height:calc(100dvh - 112px);padding:12px}.viewer-canvas.actual-size .viewer-image{margin:0}.viewer-status{width:calc(100% - 32px);text-align:center}}
+ @media(max-width:800px){.case-intro{padding:34px 24px 26px}.eyebrow{margin-top:36px!important;font-size:11px}.intro-grid{grid-template-columns:1fr;gap:28px}.intro-aside{justify-self:start;max-width:none;width:100%;font-size:16px}.intro-aside br{display:none}.scope{margin-top:14px!important}.reading-link{margin-top:12px}.project-summary{margin-top:30px;gap:12px 22px;font-size:12px}.chapter-nav>div{padding:0 24px;gap:24px}.chapter-nav a{font-size:13px;padding:16px 0}.chapter-gallery{padding:20px 0}.chapter{margin-bottom:24px!important}.chapter figcaption{padding:8px 18px 12px;gap:12px}.chapter h2{font-size:13px}.chapter h2 span{margin-right:10px;font-size:11px}.chapter figcaption>a{font-size:11px;min-width:65px;min-height:44px;display:flex;align-items:center}.case-ending{padding:52px 24px}.viewer-toolbar{height:112px;padding:12px;gap:4px;flex-wrap:wrap}.dinggao-case .viewer-toolbar h2{flex-basis:calc(100% - 80px);font-size:14px}.viewer-toolbar button{padding:7px;flex:none}.viewer-toolbar [data-size]{width:75px}.viewer-toolbar [data-close]{width:50px}.viewer-zoom{min-width:35px;font-size:12px}.viewer-count{margin-left:auto}.viewer-canvas{height:calc(100dvh - 112px);padding:12px}.viewer-image{margin:0 auto}.viewer-status{width:calc(100% - 32px);text-align:center}}
+@media(max-width:379px){.viewer-toolbar{height:164px}.viewer-canvas{height:calc(100dvh - 164px)}}
 </style>
