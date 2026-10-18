@@ -106,5 +106,17 @@
     "tag": "UI / UX",
     "date": "2026-10-02",
     "mark": true
+  },
+  {
+    "id": "13",
+    "cover": "/assets/projects/dinggao/cover.webp",
+    "title": "定稿 · 品牌素材协作平台",
+    "desc": "从需求到批准交付 · 多角色协作、版本审核与完整状态",
+    "url": "/project/dinggao",
+    "detail": "/project/dinggao",
+    "category": "recommend,ui",
+    "tag": "B 端 / UI · UX",
+    "date": "2026-10-18",
+    "mark": true
   }
 ]

@@ -1,0 +1,170 @@
+[
+  {
+    "number": "01",
+    "title": "封面 · 每一次定稿，都有据可依",
+    "width": 1600,
+    "height": 1520,
+    "src": "/assets/projects/dinggao/chapter-01.webp",
+    "small": "/assets/projects/dinggao/chapter-01-800.webp"
+  },
+  {
+    "number": "02",
+    "title": "项目命题 · 从文件管理到决策依据",
+    "width": 1600,
+    "height": 1160,
+    "src": "/assets/projects/dinggao/chapter-02.webp",
+    "small": "/assets/projects/dinggao/chapter-02-800.webp"
+  },
+  {
+    "number": "03",
+    "title": "三个问题，决定信息如何组织。",
+    "width": 1600,
+    "height": 1150,
+    "src": "/assets/projects/dinggao/chapter-03.webp",
+    "small": "/assets/projects/dinggao/chapter-03-800.webp"
+  },
+  {
+    "number": "04",
+    "title": "协作路径 · 清楚交接",
+    "width": 1600,
+    "height": 1080,
+    "src": "/assets/projects/dinggao/chapter-04.webp",
+    "small": "/assets/projects/dinggao/chapter-04-800.webp"
+  },
+  {
+    "number": "05",
+    "title": "从活动出发，把素材任务组织起来。",
+    "width": 1600,
+    "height": 1660,
+    "src": "/assets/projects/dinggao/chapter-05.webp",
+    "small": "/assets/projects/dinggao/chapter-05-800.webp"
+  },
+  {
+    "number": "06",
+    "title": "从需求到提交 · 交接信息",
+    "width": 1600,
+    "height": 1680,
+    "src": "/assets/projects/dinggao/chapter-06.webp",
+    "small": "/assets/projects/dinggao/chapter-06-800.webp"
+  },
+  {
+    "number": "07",
+    "title": "接到任务时，先看清交付要求。",
+    "width": 1600,
+    "height": 1660,
+    "src": "/assets/projects/dinggao/chapter-07.webp",
+    "small": "/assets/projects/dinggao/chapter-07-800.webp"
+  },
+  {
+    "number": "08",
+    "title": "每一轮提交，都带着修改依据。",
+    "width": 1600,
+    "height": 1430,
+    "src": "/assets/projects/dinggao/chapter-08.webp",
+    "small": "/assets/projects/dinggao/chapter-08-800.webp"
+  },
+  {
+    "number": "09",
+    "title": "工作台 · 先识别素材，再进入审核",
+    "width": 1600,
+    "height": 1320,
+    "src": "/assets/projects/dinggao/chapter-09.webp",
+    "small": "/assets/projects/dinggao/chapter-09-800.webp"
+  },
+  {
+    "number": "10",
+    "title": "审核 · 同屏核对与版本比较",
+    "width": 1600,
+    "height": 1700,
+    "src": "/assets/projects/dinggao/chapter-10.webp",
+    "small": "/assets/projects/dinggao/chapter-10-800.webp"
+  },
+  {
+    "number": "11",
+    "title": "并排比较，让变化可以被核实。",
+    "width": 1600,
+    "height": 1430,
+    "src": "/assets/projects/dinggao/chapter-11.webp",
+    "small": "/assets/projects/dinggao/chapter-11-800.webp"
+  },
+  {
+    "number": "12",
+    "title": "状态 · 已处理不等于已确认",
+    "width": 1600,
+    "height": 1450,
+    "src": "/assets/projects/dinggao/chapter-12.webp",
+    "small": "/assets/projects/dinggao/chapter-12-800.webp"
+  },
+  {
+    "number": "13",
+    "title": "不通过，也要让下一步足够明确。",
+    "width": 1600,
+    "height": 1490,
+    "src": "/assets/projects/dinggao/chapter-13.webp",
+    "small": "/assets/projects/dinggao/chapter-13-800.webp"
+  },
+  {
+    "number": "14",
+    "title": "批准前，再确认一次交付对象。",
+    "width": 1600,
+    "height": 1320,
+    "src": "/assets/projects/dinggao/chapter-14.webp",
+    "small": "/assets/projects/dinggao/chapter-14-800.webp"
+  },
+  {
+    "number": "15",
+    "title": "把已经批准的素材，变成可复用资产。",
+    "width": 1600,
+    "height": 1360,
+    "src": "/assets/projects/dinggao/chapter-15.webp",
+    "small": "/assets/projects/dinggao/chapter-15-800.webp"
+  },
+  {
+    "number": "16",
+    "title": "交付 · 把批准结果交出去",
+    "width": 1600,
+    "height": 1310,
+    "src": "/assets/projects/dinggao/chapter-16.webp",
+    "small": "/assets/projects/dinggao/chapter-16-800.webp"
+  },
+  {
+    "number": "17",
+    "title": "最新的一版，不一定是可交付的一版。",
+    "width": 1600,
+    "height": 1450,
+    "src": "/assets/projects/dinggao/chapter-17.webp",
+    "small": "/assets/projects/dinggao/chapter-17-800.webp"
+  },
+  {
+    "number": "18",
+    "title": "上传与提交失败，需要不同的恢复方式。",
+    "width": 1600,
+    "height": 1570,
+    "src": "/assets/projects/dinggao/chapter-18.webp",
+    "small": "/assets/projects/dinggao/chapter-18-800.webp"
+  },
+  {
+    "number": "19",
+    "title": "空白、失败和无权限，不是同一种状态。",
+    "width": 1600,
+    "height": 1570,
+    "src": "/assets/projects/dinggao/chapter-19.webp",
+    "small": "/assets/projects/dinggao/chapter-19-800.webp"
+  },
+  {
+    "number": "20",
+    "title": "一致的细节，降低反复理解的成本。",
+    "width": 1600,
+    "height": 1250,
+    "src": "/assets/projects/dinggao/chapter-20.webp",
+    "small": "/assets/projects/dinggao/chapter-20-800.webp"
+  },
+  {
+    "number": "21",
+    "title": "系统与复盘 · 一致且可信",
+    "width": 1600,
+    "height": 1260,
+    "src": "/assets/projects/dinggao/chapter-21.webp",
+    "small": "/assets/projects/dinggao/chapter-21-800.webp"
+  }
+]

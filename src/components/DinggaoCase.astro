@@ -1,0 +1,111 @@
+---
+import chapters from '../data/dinggao-chapters.json';
+const groups=[
+ {id:'overview',label:'项目与思路',start:1,end:4},
+ {id:'creation',label:'需求与制作',start:5,end:8},
+ {id:'review',label:'审核与反馈',start:9,end:14},
+ {id:'delivery',label:'批准与交付',start:15,end:17},
+ {id:'states',label:'异常与恢复',start:18,end:19},
+ {id:'system',label:'系统与复盘',start:20,end:21},
+];
+const descriptions=[
+ '品牌素材协作平台：让每一次定稿，都有据可依。',
+ '围绕反馈散落、版本混淆与交付依据不清的场景假设，明确三类角色的需求。',
+ '从场景问题到信息组织：队列与预览、标注与确认、批准记录绑定版本；同时说明代价。',
+ '运营建立需求、设计师提交版本、品牌负责人逐项审核、运营下载批准文件。',
+ '运营从活动进入任务，查看进度、负责人和截止时间，创建素材需求。',
+ '运营约定交付标准；设计师准备预览、源文件与修改说明。',
+ '设计师从我的任务进入需求详情，核实规格、参与人及参考资料后开始制作。',
+ '设计师在版本提交页同时核对文件、修改说明和上轮反馈；已处理仍需审核人确认。',
+ '品牌负责人使用任务队列和大幅预览逐项审核；保留版本、截止时间和本轮修改摘要。',
+ '素材标注与反馈列表同屏对应，结合历史版本核实修改。',
+ 'V2 与 V3 以相同比例并排展示，核对标题对比度和产品右侧安全距离。',
+ '反馈从两条待确认、一条待确认到全部确认，批准按钮随进度启用。',
+ '品牌负责人填写退回原因，设计师处理后提交 V4，历史退回记录保留在 V3。',
+ '批准前确认当前 V3，保存成功后形成可交付结论；请求失败时可以重试。',
+ '运营从已批准素材库查找可复用资产，进入详情核实版本和下载文件。',
+ '交付详情展示版本、批准人、时间以及预览稿、源文件和说明清单。',
+ 'V3 已批准后另行提交 V4 时，V3 仍可交付，V4 需要独立审核。',
+ '上传进度、上传失败、缺少源文件和版本保存失败分别提供恢复入口。',
+ '区分筛选无结果、任务已完成、加载失败和无权限，分别给出可继续工作的出口。',
+ '统一主次按钮、业务标签、圆角、线性图标和文字层级。',
+ '海盐蓝视觉系统，32 个流程页面与 16 个关键状态，以及下一步任务验证计划。',
+];
+---
+<main class="dinggao-case" lang="zh-CN" id="dinggao-top">
+ <header class="case-intro">
+  <a href="/project" class="back-link">← 全部作品</a>
+  <p class="eyebrow">DINGGAO / UI · UX CASE STUDY</p>
+  <div class="intro-grid"><div><h1>定稿<span>品牌素材协作平台</span></h1><p class="lead">从需求到批准交付，<br/>让版本、反馈与责任保持一致。</p></div><div class="intro-aside"><p>运营、设计师与品牌负责人，<br/>围绕同一份交付依据完成协作。</p><p class="scope">个人概念设计 / 桌面端 / 2026</p><a class="reading-link" href="#overview">开始浏览完整案例 <span>↘</span></a></div></div>
+  <div class="project-summary"><span>21 个展示章节</span><span>32 个流程页面</span><span>16 个关键状态</span><span>多角色 · 版本审核 · 批准交付</span></div>
+ </header>
+ <nav class="chapter-nav" aria-label="作品集章节"><div>{groups.map(g=><a href={'#'+g.id}>{g.label}</a>)}</div></nav>
+ <div class="chapter-gallery">
+  {groups.map(g=><section id={g.id} class="chapter-group" aria-label={g.label}>
+   {chapters.slice(g.start-1,g.end).map((c)=><figure class="chapter" id={'chapter-'+c.number}>
+    <figcaption><h2><span>{c.number}</span>{c.title}</h2><a href={c.src} target="_blank" rel="noopener" data-open-chapter={c.number} aria-label={'放大查看第 '+c.number+' 章：'+c.title}>放大查看 ↗</a></figcaption>
+    <a class="chapter-image" href={c.src} target="_blank" rel="noopener" data-open-chapter={c.number} aria-label={'放大查看：'+c.title}>
+     <img src={c.src} srcset={`${c.small} 800w, ${c.src} 1600w`} sizes="(max-width: 800px) 100vw, (max-width: 1504px) calc(100vw - 64px), 1440px" width={c.width} height={c.height} alt={descriptions[Number(c.number)-1]} loading={c.number==='01'?'eager':'lazy'} fetchpriority={c.number==='01'?'high':undefined} decoding="async" />
+    </a>
+   </figure>)}
+  </section>)}
+ </div>
+ <footer class="case-ending"><p class="eyebrow">THANK YOU FOR READING</p><h2>让协作有序，<br/>让定稿有据。</h2><p>个人概念项目。场景与问题来自设计假设，展示素材用于演示；<br/>当前为静态高保真方案，尚未进行真实用户测试。</p><div><a href="#dinggao-top">返回顶部 ↑</a><a href="/project">继续看作品 →</a></div></footer>
+ <dialog class="chapter-viewer" aria-labelledby="viewer-title">
+  <div class="viewer-toolbar"><h2 id="viewer-title">作品集大图</h2><span class="viewer-count" aria-live="polite"></span><button type="button" data-size aria-pressed="false">实际尺寸</button><button type="button" data-prev aria-label="上一章">←</button><button type="button" data-next aria-label="下一章">→</button><button type="button" data-close aria-label="关闭大图">关闭 ×</button></div>
+  <div class="viewer-canvas"><img class="viewer-image" alt="" /></div>
+  <p class="viewer-status" role="status">正在加载大图…</p>
+ </dialog>
+ <script type="application/json" id="dinggao-chapters" set:html={JSON.stringify(chapters.map((c,i)=>({...c,alt:descriptions[i]})))} />
+</main>
+<script>
+ const root=document.querySelector<HTMLElement>('.dinggao-case');
+ if(root){
+  const siteNav=document.querySelector<HTMLElement>("body nav");
+  if(siteNav){const measure=()=>root.style.setProperty("--site-nav-height",siteNav.getBoundingClientRect().height+"px");measure();new ResizeObserver(measure).observe(siteNav);}
+  const dialog=root.querySelector<HTMLDialogElement>('.chapter-viewer')!;
+  const data=JSON.parse(root.querySelector('#dinggao-chapters')!.textContent||'[]');
+  const image=dialog.querySelector<HTMLImageElement>('.viewer-image')!;
+  const title=dialog.querySelector<HTMLElement>('#viewer-title')!;
+  const count=dialog.querySelector<HTMLElement>('.viewer-count')!;
+  const status=dialog.querySelector<HTMLElement>('.viewer-status')!;
+  const canvas=dialog.querySelector<HTMLElement>('.viewer-canvas')!;
+  const size=dialog.querySelector<HTMLButtonElement>('[data-size]')!;
+  const prev=dialog.querySelector<HTMLButtonElement>('[data-prev]')!;
+  const next=dialog.querySelector<HTMLButtonElement>('[data-next]')!;
+  let index=0,trigger:HTMLElement|null=null,scrollOverflow='';
+  function show(i:number){
+   index=i;const c=data[i];title.textContent=c.title;count.textContent=`${i+1} / ${data.length}`;
+   status.textContent='正在加载大图…';status.hidden=false;
+   image.alt=c.alt;image.src=c.src;image.width=c.width;image.height=c.height;
+   prev.disabled=i===0;next.disabled=i===data.length-1;
+   canvas.classList.remove('actual-size');size.setAttribute('aria-pressed','false');size.textContent='实际尺寸';canvas.scrollTo(0,0);
+  }
+  image.addEventListener('load',()=>status.hidden=true);
+  image.addEventListener('error',()=>{status.textContent='图片加载失败，请重新打开本章或刷新页面。';status.hidden=false;});
+  root.querySelectorAll<HTMLElement>('[data-open-chapter]').forEach(a=>a.addEventListener('click',e=>{
+   if(e instanceof MouseEvent&&(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey))return;
+   e.preventDefault();trigger=a;show(Number(a.dataset.openChapter)-1);scrollOverflow=document.body.style.overflow;document.body.style.overflow='hidden';dialog.showModal();
+  }));
+  dialog.querySelector('[data-close]')!.addEventListener('click',()=>dialog.close());
+  dialog.addEventListener('close',()=>{document.body.style.overflow=scrollOverflow;trigger?.focus({preventScroll:true});});
+  prev.addEventListener('click',()=>{if(index>0)show(index-1);});next.addEventListener('click',()=>{if(index<data.length-1)show(index+1);});
+  size.addEventListener('click',()=>{const on=canvas.classList.toggle('actual-size');size.setAttribute('aria-pressed',String(on));size.textContent=on?'适应宽度':'实际尺寸';});
+  dialog.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'&&index>0){e.preventDefault();show(index-1);}if(e.key==='ArrowRight'&&index<data.length-1){e.preventDefault();show(index+1);}});
+  const links=root.querySelectorAll<HTMLAnchorElement>('.chapter-nav a');
+  const observer=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){links.forEach(a=>{if(a.hash==='#'+entry.target.id)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});}},{rootMargin:'-15% 0px -65% 0px'});
+  root.querySelectorAll('.chapter-group').forEach(section=>observer.observe(section));
+ }
+</script>
+<style>
+ .dinggao-case{--case-ink:#203343;--case-blue:#286c9a;--case-bg:#f3f7fa;--case-muted:#5b6775;background:var(--case-bg);color:var(--case-ink);font-family:'Noto Sans SC',sans-serif;isolation:isolate}
+ .dinggao-case :is(h1,h2,p,figure){margin:0}.dinggao-case a{color:inherit;text-decoration:none}.dinggao-case button{font:inherit}.dinggao-case :is(a,button):focus-visible{outline:3px solid #d58d28;outline-offset:5px}
+ .case-intro{max-width:1440px;margin:auto;padding:58px 64px 38px}.back-link{font-size:14px;color:var(--case-muted)!important}.eyebrow{font-size:13px;font-weight:600;letter-spacing:.12em;color:var(--case-blue);margin-top:56px!important}.intro-grid{display:grid;grid-template-columns:1.3fr 1fr;align-items:end;gap:64px;margin-top:24px}
+ .dinggao-case h1{font-size:clamp(48px,7vw,88px);line-height:1.2;font-weight:750;letter-spacing:-.04em;color:var(--case-ink)}.dinggao-case h1 span{display:block;font-size:clamp(24px,3vw,38px);line-height:1.6;margin-top:15px;letter-spacing:-.02em;font-weight:500}.lead{font-size:clamp(19px,2vw,25px);line-height:1.8;margin-top:26px!important}.intro-aside{max-width:420px;justify-self:end;font-size:19px;line-height:1.9}.scope{font-size:13px;color:var(--case-muted);margin-top:25px!important}.reading-link{display:flex;justify-content:space-between;border-bottom:1px solid #286c9a;padding:15px 0;margin-top:25px;color:var(--case-blue)!important;font-size:16px}.project-summary{display:flex;flex-wrap:wrap;gap:15px 38px;border-top:1px solid #d5e0e8;margin-top:52px;padding-top:24px;font-size:13px;color:var(--case-muted)}
+ .chapter-nav{position:sticky;top:var(--site-nav-height,80px);z-index:5;background:#f3f7faf5;border-block:1px solid #dde6ed}.chapter-nav>div{max-width:1440px;margin:auto;display:flex;gap:30px;padding:0 64px;overflow-x:auto}.chapter-nav a{white-space:nowrap;padding:18px 0;font-size:14px;color:var(--case-muted);border-bottom:2px solid transparent}.chapter-nav a:hover,.chapter-nav a[aria-current]{color:var(--case-blue);border-color:var(--case-blue)}
+ .chapter-gallery{max-width:1504px;padding:32px;margin:auto}.chapter-group{scroll-margin-top:calc(var(--site-nav-height,80px) + 72px)}.chapter{margin:0 0 42px!important;scroll-margin-top:80px}.chapter figcaption{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px 4px 16px}.chapter h2{font-size:16px;font-weight:500;line-height:1.6;letter-spacing:0;color:var(--case-ink)}.chapter h2 span{color:var(--case-blue);margin-right:20px;font-size:13px;font-variant-numeric:tabular-nums}.chapter figcaption>a{font-size:12px;color:var(--case-muted);white-space:nowrap;padding:8px 0}.chapter-image{display:block;cursor:zoom-in;background:#e0edf6;overflow:hidden}.chapter-image img{width:100%;height:auto;display:block}.chapter-image:hover{outline:1px solid #a0bfd4;outline-offset:3px}
+ .case-ending{background:#172b3a;color:#d5e6f2;padding:80px max(32px,calc((100vw - 1312px)/2)) 90px}.case-ending .eyebrow{margin-top:0!important;color:#9cc5de}.dinggao-case .case-ending h2{color:#fff;font-size:clamp(35px,5vw,64px);line-height:1.5;margin:24px 0 28px;font-weight:650}.case-ending p{font-size:14px;line-height:1.9}.case-ending>div{display:flex;gap:35px;margin-top:36px;flex-wrap:wrap}.case-ending a{padding:12px 0;border-bottom:1px solid #627f93;font-size:15px}
+ .chapter-viewer{position:fixed;inset:0;width:100%;max-width:none;height:100dvh;max-height:none;padding:0;margin:0;border:0;background:#0e1c28;color:#fff;overflow:hidden}.chapter-viewer::backdrop{background:#0e1c28}.viewer-toolbar{height:76px;display:flex;align-items:center;gap:12px;padding:14px 24px;border-bottom:1px solid #344c5f;background:#172b3a}.dinggao-case .viewer-toolbar h2{font-size:16px;line-height:1.5;color:#fff;font-weight:500;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.viewer-count{font-size:13px;color:#bad0df;white-space:nowrap}.viewer-toolbar button{background:#233e51;color:#fff;border:1px solid #486375;border-radius:5px;padding:10px 14px;min-width:44px;min-height:44px;cursor:pointer;font-size:13px;white-space:nowrap}.viewer-toolbar button:disabled{opacity:.4;cursor:default}.viewer-canvas{height:calc(100dvh - 76px);overflow:auto;padding:24px;overscroll-behavior:contain}.viewer-image{display:block;width:min(100%,1600px);max-width:none;height:auto;margin:0 auto}.viewer-canvas.actual-size .viewer-image{width:1600px;margin:0 auto}.viewer-status{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:#172b3a;padding:12px 20px;font-size:14px;border:1px solid #486375}
+ :global(.theme-dark) .dinggao-case{--case-bg:#152632;--case-ink:#e0ebf3;--case-muted:#b0c4d3;--case-blue:#9cc5de}:global(.theme-dark) .chapter-nav{background:#152632f5;border-color:#344c5f}:global(.theme-dark) .project-summary{border-color:#344c5f}
+ @media(max-width:800px){.case-intro{padding:34px 24px 26px}.eyebrow{margin-top:36px!important;font-size:11px}.intro-grid{grid-template-columns:1fr;gap:28px}.intro-aside{justify-self:start;max-width:none;width:100%;font-size:16px}.intro-aside br{display:none}.scope{margin-top:14px!important}.reading-link{margin-top:12px}.project-summary{margin-top:30px;gap:12px 22px;font-size:12px}.chapter-nav>div{padding:0 24px;gap:24px}.chapter-nav a{font-size:13px;padding:16px 0}.chapter-gallery{padding:20px 0}.chapter{margin-bottom:24px!important}.chapter figcaption{padding:8px 18px 12px;gap:12px}.chapter h2{font-size:13px}.chapter h2 span{margin-right:10px;font-size:11px}.chapter figcaption>a{font-size:11px;min-width:65px;min-height:44px;display:flex;align-items:center}.case-ending{padding:52px 24px}.viewer-toolbar{height:112px;padding:12px;gap:6px;flex-wrap:wrap}.dinggao-case .viewer-toolbar h2{flex-basis:calc(100% - 80px);font-size:14px}.viewer-toolbar button{padding:9px 12px}.viewer-count{margin-left:auto}.viewer-canvas{height:calc(100dvh - 112px);padding:12px}.viewer-canvas.actual-size .viewer-image{margin:0}.viewer-status{width:calc(100% - 32px);text-align:center}}
+</style>
