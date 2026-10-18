@@ -1,12 +1,14 @@
 ---
 import chapters from '../data/dinggao-chapters.json';
 const groups=[
- {id:'overview',label:'项目与思路',start:1,end:4},
- {id:'creation',label:'需求与制作',start:5,end:8},
- {id:'review',label:'审核与反馈',start:9,end:14},
- {id:'delivery',label:'批准与交付',start:15,end:17},
- {id:'states',label:'异常与恢复',start:18,end:19},
- {id:'system',label:'系统与复盘',start:20,end:21},
+ {id:'overview',label:'项目概览',start:1,end:2},
+ {id:'needs',label:'需求分析',start:3,end:5},
+ {id:'workflow',label:'工作流程',start:6,end:6},
+ {id:'creation',label:'需求与制作',start:7,end:10},
+ {id:'review',label:'审核与反馈',start:11,end:16},
+ {id:'delivery',label:'批准与交付',start:17,end:19},
+ {id:'states',label:'异常与恢复',start:20,end:21},
+ {id:'system',label:'系统与复盘',start:22,end:23},
 ];
 const descriptions=[
  '品牌素材协作平台：让每一次定稿，都有据可依。',
@@ -37,7 +39,7 @@ const descriptions=[
   <a href="/project" class="back-link">← 全部作品</a>
   <p class="eyebrow">DINGGAO / UI · UX CASE STUDY</p>
   <div class="intro-grid"><div><h1>定稿<span>品牌素材协作平台</span></h1><p class="lead">从需求到批准交付，<br/>让版本、反馈与责任保持一致。</p></div><div class="intro-aside"><p>运营、设计师与品牌负责人，<br/>围绕同一份交付依据完成协作。</p><p class="scope">个人概念设计 / 桌面端 / 2026</p><a class="reading-link" href="#overview">开始浏览完整案例 <span>↘</span></a></div></div>
-  <div class="project-summary"><span>21 个展示章节</span><span>32 个流程页面</span><span>16 个关键状态</span><span>多角色 · 版本审核 · 批准交付</span></div>
+  <div class="project-summary"><span>{chapters.length} 个展示章节</span><span>32 个流程页面</span><span>16 个关键状态</span><span>多角色 · 版本审核 · 批准交付</span></div>
  </header>
  <nav class="chapter-nav" aria-label="作品集章节"><div>{groups.map(g=><a href={'#'+g.id}>{g.label}</a>)}</div></nav>
  <div class="chapter-gallery">
@@ -45,7 +47,7 @@ const descriptions=[
    {chapters.slice(g.start-1,g.end).map((c)=><figure class="chapter" id={'chapter-'+c.number}>
     <figcaption><h2><span>{c.number}</span>{c.title}</h2><a href={c.hd} target="_blank" rel="noopener" data-open-chapter={c.number} aria-label={'放大查看第 '+c.number+' 章：'+c.title}>放大查看 ↗</a></figcaption>
     <a class="chapter-image" href={c.hd} target="_blank" rel="noopener" data-open-chapter={c.number} aria-label={'放大查看：'+c.title}>
-     <img src={c.src} srcset={`${c.small} 800w, ${c.src} 1600w, ${c.retina} 2400w`} sizes="(max-width: 800px) 100vw, (max-width: 1504px) calc(100vw - 64px), 1440px" width={c.width} height={c.height} alt={descriptions[Number(c.number)-1]} loading={c.number==='01'?'eager':'lazy'} fetchpriority={c.number==='01'?'high':undefined} decoding="async" />
+     <img src={c.src} srcset={`${c.small} 800w, ${c.src} 1600w, ${c.retina} 2400w`} sizes="(max-width: 800px) 100vw, (max-width: 1504px) calc(100vw - 64px), 1440px" width={c.width} height={c.height} alt={('alt' in c ? c.alt : descriptions[Number(c.number)-1])} loading={c.number==='01'?'eager':'lazy'} fetchpriority={c.number==='01'?'high':undefined} decoding="async" />
     </a>
    </figure>)}
   </section>)}
@@ -56,7 +58,7 @@ const descriptions=[
   <div class="viewer-canvas"><img class="viewer-image" alt="" draggable="false" /></div>
   <p class="viewer-status" role="status">正在加载大图…</p>
  </dialog>
- <script type="application/json" id="dinggao-chapters" set:html={JSON.stringify(chapters.map((c,i)=>({...c,alt:descriptions[i]})))} />
+ <script type="application/json" id="dinggao-chapters" set:html={JSON.stringify(chapters.map((c,i)=>({...c,alt:('alt' in c ? c.alt : descriptions[Number(c.number)-1])})))} />
 </main>
 <script>
  const root=document.querySelector<HTMLElement>('.dinggao-case');
@@ -104,7 +106,7 @@ const descriptions=[
   image.addEventListener('error',()=>{status.textContent='图片加载失败，请重新打开本章或刷新页面。';status.hidden=false;});
   root.querySelectorAll<HTMLElement>('[data-open-chapter]').forEach(a=>a.addEventListener('click',e=>{
    if(e instanceof MouseEvent&&(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey))return;
-   e.preventDefault();trigger=a;show(Number(a.dataset.openChapter)-1);scrollOverflow=document.body.style.overflow;document.body.style.overflow='hidden';dialog.showModal();
+   e.preventDefault();trigger=a;show(data.findIndex((c:{number:string})=>c.number===a.dataset.openChapter));scrollOverflow=document.body.style.overflow;document.body.style.overflow='hidden';dialog.showModal();
   }));
   dialog.querySelector('[data-close]')!.addEventListener('click',()=>dialog.close());
   dialog.addEventListener('close',()=>{document.body.style.overflow=scrollOverflow;trigger?.focus({preventScroll:true});});

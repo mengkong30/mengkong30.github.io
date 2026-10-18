@@ -24,6 +24,32 @@
     "hdHeight": 3480
   },
   {
+    "number": "02A",
+    "title": "需求分析 · 角色与场景",
+    "width": 1600,
+    "height": 1600,
+    "src": "/assets/projects/dinggao/chapter-02a.webp",
+    "small": "/assets/projects/dinggao/chapter-02a-800.webp",
+    "hd": "/assets/projects/dinggao/chapter-02a-hd.webp",
+    "retina": "/assets/projects/dinggao/chapter-02a-2400.webp",
+    "hdWidth": 4800,
+    "hdHeight": 4800,
+    "alt": "需求分析：运营、设计师与品牌负责人的目标、场景阻碍和产品支持，以及找对任务、核实修改、交付正确版本三个任务结果。"
+  },
+  {
+    "number": "02B",
+    "title": "需求分析 · 优先级与验证",
+    "width": 1600,
+    "height": 1700,
+    "src": "/assets/projects/dinggao/chapter-02b.webp",
+    "small": "/assets/projects/dinggao/chapter-02b-800.webp",
+    "hd": "/assets/projects/dinggao/chapter-02b-hd.webp",
+    "retina": "/assets/projects/dinggao/chapter-02b-2400.webp",
+    "hdWidth": 4800,
+    "hdHeight": 5100,
+    "alt": "需求分析：需求分配、版本校验、逐项复审和批准交付四项核心需求；列出优先原因、验收判据、辅助需求、范围边界及验证计划。"
+  },
+  {
     "number": "03",
     "title": "三个问题，决定信息如何组织。",
     "width": 1600,
@@ -37,15 +63,16 @@
   },
   {
     "number": "04",
-    "title": "协作路径 · 清楚交接",
+    "title": "工作流程图 · 三角色泳道",
     "width": 1600,
-    "height": 1080,
-    "src": "/assets/projects/dinggao/chapter-04.webp",
-    "small": "/assets/projects/dinggao/chapter-04-800.webp",
-    "hd": "/assets/projects/dinggao/chapter-04-hd.webp",
-    "retina": "/assets/projects/dinggao/chapter-04-2400.webp",
+    "height": 2320,
+    "src": "/assets/projects/dinggao/chapter-04-workflow.webp",
+    "small": "/assets/projects/dinggao/chapter-04-workflow-800.webp",
+    "hd": "/assets/projects/dinggao/chapter-04-workflow-hd.webp",
+    "retina": "/assets/projects/dinggao/chapter-04-workflow-2400.webp",
     "hdWidth": 4800,
-    "hdHeight": 3240
+    "hdHeight": 6960,
+    "alt": "三角色工作流程图：运营创建并分配需求，设计师查看要求、制作上传并校验文件；品牌负责人核对、要求修改或确认反馈并批准；运营领取批准版本交付包。棕色箭头表示补齐、退回与继续核对。"
   },
   {
     "number": "05",
