@@ -1,0 +1,41 @@
+[
+  {
+    "index": "01",
+    "kind": "skill",
+    "slug": "ui-interface-design",
+    "title": "UI 界面设计",
+    "version": "v1.1.0",
+    "description": "从实际界面迭代中整理的中文 UI 设计工作流，帮助收敛设计方向、统一成套页面，并在真实尺寸下检查细节。",
+    "features": ["视觉统一", "图标与组件", "状态补齐", "页面关系图"],
+    "requirements": "适用于可加载 Skill 的 AI 助手；编辑 Figma 时需另外配置可用的连接工具。",
+    "repository": "https://github.com/mengkong30/ui-interface-design",
+    "guide": "https://github.com/mengkong30/ui-interface-design#下载与安装",
+    "download": "https://github.com/mengkong30/ui-interface-design/releases/download/v1.1.0/ui-interface-design-v1.1.0.zip"
+  },
+  {
+    "index": "02",
+    "kind": "skill",
+    "slug": "ae-motion-production",
+    "title": "AE 二维动效制作",
+    "version": "v1.0.1",
+    "description": "面向 Codex 的可编辑二维动效制作技能，串联参考拆解、矢量分件、控制器、动作精修与 After Effects 工程交付。",
+    "features": ["角色与 IP 表情", "图标与道具", "UI 动效", "可编辑 AEP 交付"],
+    "requirements": "需要支持 Skill 的 Codex 环境；制作与渲染 AEP 时需要可用的 Adobe After Effects。",
+    "repository": "https://github.com/mengkong30/ae-motion-production",
+    "guide": "https://github.com/mengkong30/ae-motion-production#安装",
+    "download": "https://github.com/mengkong30/ae-motion-production/releases/download/v1.0.1/ae-motion-production-v1.0.1.zip"
+  },
+  {
+    "index": "03",
+    "kind": "plugin",
+    "slug": "codex-local-bridge",
+    "title": "Codex Local Bridge",
+    "version": "v0.3.0",
+    "description": "连接支持 MCP 的 AI 助手与本地 Figma Desktop，读取页面和选区、编辑原生图层与组件，并导出 PNG 或 SVG。",
+    "features": ["本地 Figma 连接", "可编辑图层", "多文件路由", "PNG / SVG 导出"],
+    "requirements": "社区插件 · 需要 Node.js 22+、Figma Desktop 和支持 MCP 的客户端。",
+    "repository": "https://github.com/mengkong30/codex-local-bridge",
+    "guide": "https://github.com/mengkong30/codex-local-bridge#安装与启动",
+    "download": "https://github.com/mengkong30/codex-local-bridge/releases/download/v0.3.0/codex-local-bridge-v0.3.0.zip"
+  }
+]
