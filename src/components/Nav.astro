@@ -3,9 +3,10 @@
 import ThemeToggle from './ThemeToggle.astro';
 import {nav} from '../data/content';
 import NavMobile from "../components/NavMobile.astro";
+const isProjectPage = Astro.url.pathname === '/project' || Astro.url.pathname.startsWith('/project/');
 ---
 
-<nav>
+<nav class:list={{ 'project-nav': isProjectPage }}>
 	<div class="container nav-wrapper">
 		<div class="menu-header">
 			<div class="site-title">
@@ -96,6 +97,12 @@ import NavMobile from "../components/NavMobile.astro";
 		-webkit-backdrop-filter: saturate(300%) blur(5px);
 		backdrop-filter: saturate(300%) blur(5px);
 		background-color: rgba(var(--color-999-rgb), 0.65);
+	}
+	.project-nav {
+		background-color: var(--color-999);
+		-webkit-backdrop-filter: none;
+		backdrop-filter: none;
+		box-shadow: 0 1px 0 var(--color-800);
 	}
 	.bg-ticker{
 		position: absolute;
